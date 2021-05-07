@@ -1,8 +1,5 @@
 package com.nacol.TheRoadToGeek.week_01_classloader;
 
-import lombok.SneakyThrows;
-
-
 public class NacolClassLoader extends ClassLoader{
 
     private String filePath;
@@ -11,7 +8,6 @@ public class NacolClassLoader extends ClassLoader{
         this.filePath = filePath;
     }
 
-    @SneakyThrows
     @Override
     protected Class<?> findClass(String name) {
         //获取加密的字节数组（暂用工具类，比较死）
@@ -22,6 +18,5 @@ public class NacolClassLoader extends ClassLoader{
         decoder.decode(bytes);
         return defineClass(name, bytes, 0, bytes.length);
     }
-
 
 }
