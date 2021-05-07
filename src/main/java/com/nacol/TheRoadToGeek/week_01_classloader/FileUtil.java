@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.classloader;
+package com.nacol.TheRoadToGeek.week_01_classloader;
 
 import java.io.IOException;
 import java.nio.file.Files;
