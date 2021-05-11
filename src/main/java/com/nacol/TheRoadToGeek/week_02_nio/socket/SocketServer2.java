@@ -18,5 +18,4 @@ public class SocketServer2 {
             ).start();
         }
     }
-
 }
