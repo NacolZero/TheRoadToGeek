@@ -52,12 +52,12 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
         } finally {
             if (fullHttpRequest != null) {
                 if (!HttpUtil.isKeepAlive(fullHttpRequest)) {
-                    ctx.write(respone).addListener(ChannelFutureListener.CLOSE);
-                    ctx.flush();
+//                    ctx.write(respone).addListener(ChannelFutureListener.CLOSE);
+                    ctx.writeAndFlush(respone).addListener(ChannelFutureListener.CLOSE);
                 } else {
                     respone.headers().set(CONNECTION, KEEP_ALIVE);
-                    ctx.write(respone);
-                    ctx.flush();
+//                    ctx.write(respone);
+                    ctx.writeAndFlush(respone);
                 }
             }
         }
