@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02_netty;
+package com.nacol.TheRoadToGeek.week_02_nio.base_netty;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -20,14 +20,11 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println("--------------------");
         try {
             // msg 的本身是一个求情的包装类对象
             // FullHttpRequest 由 Netty 实现
             FullHttpRequest fullHttpRequest = (FullHttpRequest)msg;
             String uri = fullHttpRequest.uri();
-            System.out.println("uri : " + uri);
-
 
             //此处 相当于是路由 或者  controller mapping
             if (uri.contains("/test")) {
@@ -43,7 +40,6 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
     }
 
     private void handle(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx, String msg) {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx : " + msg);
         // Netty 4.1.51 实现
         FullHttpResponse respone = null;
         try {

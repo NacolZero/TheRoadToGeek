@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02_netty;
+package com.nacol.TheRoadToGeek.week_02_nio.base_netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -20,7 +20,7 @@ import io.netty.handler.logging.LoggingHandler;
 public class NettyHttpServer {
 
     public static void main(String[] args) throws InterruptedException {
-        int port = 8808;
+        int port = 9989;
         EventLoopGroup bosssGroup = new NioEventLoopGroup(2);
         EventLoopGroup workerGroup = new NioEventLoopGroup(16);
 
