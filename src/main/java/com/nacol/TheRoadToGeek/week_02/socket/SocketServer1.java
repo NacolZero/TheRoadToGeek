@@ -11,7 +11,7 @@ public class SocketServer1 {
         ServerSocket serverSocket = new ServerSocket(9989);
         while(true) {
             Socket socket = serverSocket.accept();
-            HttpClientSimpeDemo.service(socket);
+            BaseService.handle(socket);
         }
 
     }

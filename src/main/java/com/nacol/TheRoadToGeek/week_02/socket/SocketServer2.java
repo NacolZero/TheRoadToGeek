@@ -14,7 +14,7 @@ public class SocketServer2 {
             Socket socket = serverSocket.accept();
             //无脑开启线程，没有管理线程生命周期。开启关闭线程会浪费很多资源资源。
             new Thread(()->
-                    HttpClientSimpeDemo.service(socket)
+                    BaseService.handle(socket)
             ).start();
         }
     }

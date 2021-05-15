@@ -15,7 +15,7 @@ public class SocketServer3 {
         ServerSocket serverSocket = new ServerSocket(9989);
         while(true) {
             Socket socket = serverSocket.accept();
-            executorService.execute(()-> HttpClientSimpeDemo.service(socket));
+            executorService.execute(()-> BaseService.handle(socket));
         }
     }
 

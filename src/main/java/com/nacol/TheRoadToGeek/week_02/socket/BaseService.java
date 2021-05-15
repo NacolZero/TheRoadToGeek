@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class HttpClientSimpeDemo {
+public class BaseService {
 
-    public static void service(Socket socket) {
+    public static void handle(Socket socket) {
         try {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
             printWriter.println("HTTP/1.1 200 OK");

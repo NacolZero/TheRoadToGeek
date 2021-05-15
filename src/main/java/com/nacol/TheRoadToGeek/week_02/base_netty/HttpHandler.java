@@ -1,5 +1,6 @@
-package com.nacol.TheRoadToGeek.week_02_netty;
+package com.nacol.TheRoadToGeek.week_02.base_netty;
 
+import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -26,13 +27,14 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
             // FullHttpRequest 由 Netty 实现
             FullHttpRequest fullHttpRequest = (FullHttpRequest)msg;
             String uri = fullHttpRequest.uri();
-            System.out.println("uri : " + uri);
-
             //此处 相当于是路由 或者  controller mapping
+            JSONObject result = new JSONObject();
             if (uri.contains("/test")) {
-                handle(fullHttpRequest, ctx, "Hi ^@^ Test");
+                result.put("msg", "test");
+                handle(fullHttpRequest, ctx, result.toJSONString());
             } else {
-                handle(fullHttpRequest, ctx, "Hi ^@^ Other");
+                result.put("msg", "test");
+                handle(fullHttpRequest, ctx, result.toJSONString());
             }
         } catch (Exception e) {
             e.printStackTrace();
