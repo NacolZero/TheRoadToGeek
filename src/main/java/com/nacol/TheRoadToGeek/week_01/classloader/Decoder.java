@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_01_classloader;
+package com.nacol.TheRoadToGeek.week_01.classloader;
 
 public interface Decoder {
 

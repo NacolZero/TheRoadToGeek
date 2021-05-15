@@ -1,6 +1,5 @@
-package com.nacol.TheRoadToGeek.jvm;
+package com.nacol.TheRoadToGeek.week_01.jvm;
 
-import java.time.LocalDateTime;
 import java.util.Random;
 
 

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02_httpclient.socket;
+package com.nacol.TheRoadToGeek.week_02.socket;
 
 import java.io.IOException;
 import java.net.ServerSocket;

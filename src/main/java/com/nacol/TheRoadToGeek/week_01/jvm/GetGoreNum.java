@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.jvm;
+package com.nacol.TheRoadToGeek.week_01.jvm;
 
 public class GetGoreNum {
 

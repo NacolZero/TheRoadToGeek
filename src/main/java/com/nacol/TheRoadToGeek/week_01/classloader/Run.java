@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_01_classloader;
+package com.nacol.TheRoadToGeek.week_01.classloader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
