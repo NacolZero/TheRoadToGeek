@@ -42,7 +42,6 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
     }
 
     private void handle(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx, String msg) {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx : " + msg);
         // Netty 4.1.51 实现
         FullHttpResponse respone = null;
         try {
