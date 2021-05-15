@@ -63,7 +63,8 @@ public class HttpClientHelper {
     private static void initParams(HttpUriRequest request, HttpRequestDto httpRequestDto) {
         //STEP 设置请求头
         if (MapUtils.isNotEmpty(httpRequestDto.getCustomHeaders())) {
-            httpRequestDto.getCustomHeaders().forEach(request::addHeader);
+            httpRequestDto.getCustomHeaders().forEach((k,v)->request.addHeader(k, v));
+//            httpRequestDto.getCustomHeaders().forEach(request::addHeader);
         }
 
         //STEP 参数验证

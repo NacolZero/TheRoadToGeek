@@ -8,7 +8,8 @@ package com.nacol.TheRoadToGeek.common.entity.http;
  */
 public enum HttpSourceCacheEnum {
 
-    URL_01("test", "127.0.0.1", "9989", "test", false, "get", null);
+    URL_01("test", "127.0.0.1", "9989", "test", false, "get", null),
+    URL_02("pay", "127.0.0.1", "9989", "pay", false, "post", "body");
 
     public String serviceCode;
     public String ip;

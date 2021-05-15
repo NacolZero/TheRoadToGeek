@@ -15,12 +15,12 @@ public class Run {
 
         //请求参数
         Map<String, String> getReqParams = new HashMap<>();
-        getReqParams.put("name", "nacol");
+        getReqParams.put("name", "ahahahaha");
 
         //初始化请求参数
         HttpRequestDto httpRequestDto = new HttpRequestDto()
                 //业务类型
-                .setServiceCode("test")
+                .setServiceCode("pay")
                 //自定义请求头（暂时未使用配置的方式）
                 .setCustomHeaders(headers)
                 .setParam(getReqParams);

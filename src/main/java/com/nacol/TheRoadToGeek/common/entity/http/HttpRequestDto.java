@@ -45,14 +45,14 @@ public class HttpRequestDto extends BaseSendDto {
      * params方式，http://ip:port/uri?param1=val1&param2=val2 请使用 Map
      * Post:
      * form，表单请使用 Map
-     * body，请使用 Json
+     * body，请使用 body
      * xml， 使用 String 字符串
      */
     private Object param;
 
     /**
      * get: 不用设置默认 params 方式
-     * Post: from / json / xml
+     * Post: from / body / xml
      */
     private String paramType;
 
@@ -105,7 +105,6 @@ public class HttpRequestDto extends BaseSendDto {
         throw new ServiceException("request configuration error.");
     }
 
-
     public boolean isHttps() {
         return https;
     }
@@ -120,8 +119,8 @@ public class HttpRequestDto extends BaseSendDto {
         return this;
     }
 
-    public String getParam() {
-        return this.paramType;
+    public Object getParam() {
+        return this.param;
     }
 
     public HttpRequestDto setParam(Object param) {
