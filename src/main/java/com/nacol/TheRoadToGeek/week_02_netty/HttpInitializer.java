@@ -18,8 +18,9 @@ public class HttpInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel channel) {
-        //自己控制流水线流程
+        //创建 pipeline
         ChannelPipeline pipeline = channel.pipeline();
+        //责任链模式 ChannelHandlerContext
         //httpServer 编码器
         pipeline.addLast(new HttpServerCodec());
         //报文聚合器

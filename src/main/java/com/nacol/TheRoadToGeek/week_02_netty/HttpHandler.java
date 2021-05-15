@@ -28,7 +28,6 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
             String uri = fullHttpRequest.uri();
             System.out.println("uri : " + uri);
 
-
             //此处 相当于是路由 或者  controller mapping
             if (uri.contains("/test")) {
                 handle(fullHttpRequest, ctx, "Hi ^@^ Test");
