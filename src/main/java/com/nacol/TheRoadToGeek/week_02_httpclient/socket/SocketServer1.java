@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02_nio.socket;
+package com.nacol.TheRoadToGeek.week_02_httpclient.socket;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,7 +11,7 @@ public class SocketServer1 {
         ServerSocket serverSocket = new ServerSocket(9989);
         while(true) {
             Socket socket = serverSocket.accept();
-            Waiter.service(socket);
+            HttpClientSimpeDemo.service(socket);
         }
 
     }

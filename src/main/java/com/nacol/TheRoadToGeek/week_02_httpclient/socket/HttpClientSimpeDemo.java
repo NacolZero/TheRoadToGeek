@@ -1,10 +1,10 @@
-package com.nacol.TheRoadToGeek.week_02_nio.socket;
+package com.nacol.TheRoadToGeek.week_02_httpclient.socket;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Waiter {
+public class HttpClientSimpeDemo {
 
     public static void service(Socket socket) {
         try {

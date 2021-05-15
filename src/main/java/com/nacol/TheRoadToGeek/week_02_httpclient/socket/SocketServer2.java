@@ -1,7 +1,6 @@
-package com.nacol.TheRoadToGeek.week_02_nio.socket;
+package com.nacol.TheRoadToGeek.week_02_httpclient.socket;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -14,7 +13,7 @@ public class SocketServer2 {
             Socket socket = serverSocket.accept();
             //无脑开启线程，没有管理线程生命周期。开启关闭线程会浪费很多资源资源。
             new Thread(()->
-                    Waiter.service(socket)
+                    HttpClientSimpeDemo.service(socket)
             ).start();
         }
     }
