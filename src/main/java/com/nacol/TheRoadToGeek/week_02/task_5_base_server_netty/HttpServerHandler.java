@@ -19,7 +19,7 @@ import static org.apache.coyote.http11.Constants.CONNECTION;
  * @Date 2021/5/11
  * @Description http 对具体业务的处理
  */
-public class HttpHandler extends ChannelInboundHandlerAdapter {
+public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {

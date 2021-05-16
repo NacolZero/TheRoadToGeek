@@ -14,7 +14,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
  * 如果走的是 http 协议就会自动进入这里
  * 自定义信道初始化，定义流水线流程
  */
-public class HttpInitializer extends ChannelInitializer<SocketChannel> {
+public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel channel) {
@@ -26,6 +26,6 @@ public class HttpInitializer extends ChannelInitializer<SocketChannel> {
         //报文聚合器
         pipeline.addLast(new HttpObjectAggregator(1024 * 1024));
         //自己定义的 handler
-        pipeline.addLast(new HttpHandler());
+        pipeline.addLast(new HttpServerHandler());
     }
 }

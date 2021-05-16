@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.task_02_netty_client;
+package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -13,7 +13,7 @@ import java.net.URI;
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.TEST;
 
 @Log4j2
-public class HttpClientBusinessHandler extends ChannelInboundHandlerAdapter {
+public class HttpClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.task_02_netty_client;
+package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,7 +8,7 @@ import io.netty.handler.codec.http.HttpContentDecompressor;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 
 
-public class HttpClientHandlerInitial extends ChannelInitializer<SocketChannel> {
+public class HttpClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -20,7 +20,7 @@ public class HttpClientHandlerInitial extends ChannelInitializer<SocketChannel> 
         //http响应解压缩
         pipeline.addLast(new HttpContentDecompressor());
         //业务handler
-        pipeline.addLast(new HttpClientBusinessHandler());
+        pipeline.addLast(new HttpClientHandler());
 
     }
 }
