@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02.base_netty;
+package com.nacol.TheRoadToGeek.week_02.base_server_netty;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

@@ -1,9 +1,12 @@
-package com.nacol.TheRoadToGeek.week_02.http_client;
+package com.nacol.TheRoadToGeek.common.http.send_param.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.ParamStrategy;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.ParamStrategyFactory;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategyFactory;
+import com.nacol.TheRoadToGeek.common.http.send_param.SendStrategy;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -33,13 +36,13 @@ public class HttpClientHelper {
      * @Date 2021/5/15
      * @Description 发送请求
      */
-    public static Object sendHttpRequest(HttpRequestDto httpRequestDto) throws IOException {
+    public static HttpResponseDto sendRequest(HttpRequestDto httpRequestDto) {
         //STEP 初始化请求
         HttpUriRequest request = initRequest(httpRequestDto);
         //STEP 初始化参数
         initParams(request, httpRequestDto);
         //STEP 执行请求
-        Object result = executeRequest(request, httpRequestDto);
+        HttpResponseDto result = executeRequest(request, httpRequestDto);
         //STEP 日志(不该写这里)
         recordLog(httpRequestDto);
         return result;
@@ -77,7 +80,7 @@ public class HttpClientHelper {
         paramStrategy.setParam(request, httpRequestDto);
     }
 
-    private static String executeRequest(HttpUriRequest request, HttpRequestDto httpRequestDto) throws IOException {
+    private static HttpResponseDto executeRequest(HttpUriRequest request, HttpRequestDto httpRequestDto) {
         //STEP 初始化 http 类型
         CloseableHttpClient httpClient;
         if (httpRequestDto.isHttps()) {
@@ -88,11 +91,18 @@ public class HttpClientHelper {
             httpClient = HttpClients.createDefault();
         }
         //STEP 执行请求
-        CloseableHttpResponse httpResponse = httpClient.execute(request);
-        String result = EntityUtils.toString(httpResponse.getEntity(), UTF_8);
-        httpClient.close();
-        httpResponse.close();
-        return result;
+        HttpResponseDto responseDto = null;
+        try {
+            CloseableHttpResponse httpResponse = httpClient.execute(request);
+            String resultStr = EntityUtils.toString(httpResponse.getEntity(), UTF_8);
+            //转化约定的返回结果类型
+            responseDto = JSONObject.parseObject(resultStr, HttpResponseDto.class);
+            httpClient.close();
+            httpResponse.close();
+        } catch (IOException exp) {
+            exp.printStackTrace();
+        }
+        return responseDto;
     }
 
     private static void recordLog(HttpRequestDto httpRequestDto) {

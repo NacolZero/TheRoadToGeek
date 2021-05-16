@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.common.http.request_strategy;
+package com.nacol.TheRoadToGeek.common.http.param_strategy;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import org.apache.http.client.methods.HttpUriRequest;

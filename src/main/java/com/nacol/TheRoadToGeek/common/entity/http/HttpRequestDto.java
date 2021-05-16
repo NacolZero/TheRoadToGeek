@@ -13,6 +13,14 @@ import java.util.Map;
  */
 public class HttpRequestDto extends BaseSendDto {
 
+    public static final String HTTP_CLIENT = "httpclient";
+    public static final String NETTY = "netty";
+
+    /**
+     * 发送技术：httpclient、netty
+     */
+    private String technology;
+
     /**
      * 业务 Code，对应 ip + port + uri
      */
@@ -55,6 +63,8 @@ public class HttpRequestDto extends BaseSendDto {
      * Post: from / body / xml
      */
     private String paramType;
+
+    private boolean logRecord;
 
     public HttpRequestDto() {
     }
@@ -125,6 +135,29 @@ public class HttpRequestDto extends BaseSendDto {
 
     public HttpRequestDto setParam(Object param) {
         this.param = param;
+        return this;
+    }
+
+    public String getTechnology() {
+        return technology;
+    }
+
+    public HttpRequestDto sendByHttpClient(){
+        this.technology = HTTP_CLIENT;
+        return this;
+    }
+
+    public HttpRequestDto sendByNetty(){
+        this.technology = NETTY;
+        return this;
+    }
+
+    public boolean isLogRecord(){
+        return this.logRecord;
+    }
+
+    public HttpRequestDto log() {
+        this.logRecord = true;
         return this;
     }
 

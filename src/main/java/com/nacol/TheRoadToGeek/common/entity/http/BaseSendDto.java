@@ -12,14 +12,6 @@ public class BaseSendDto implements Serializable {
 
     private static final long serialVersionUID = -976806130063122788L;
 
-    private boolean logRecord;
 
-    public boolean isLogRecord(){
-        return this.logRecord;
-    }
-
-    public void setLogRecord(boolean logRecord) {
-        this.logRecord = logRecord;
-    }
 
 }

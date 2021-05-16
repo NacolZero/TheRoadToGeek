@@ -1,0 +1,36 @@
+package com.nacol.TheRoadToGeek.common.http.send_param;
+
+import com.nacol.TheRoadToGeek.common.Exception.StrategyNotFoundException;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.common.http.send_param.impl.HttpClientHelper;
+import com.nacol.TheRoadToGeek.common.http.send_param.impl.NettyClientHelper;
+
+import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.HTTP_CLIENT;
+import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.NETTY;
+
+/**
+ * @Author Nacol
+ * @Email Nacol@sina.com
+ * @Date 2021/5/16
+ * @Description http 发送助手
+ * ps: 此类关注与解耦调用和被调用方的具体实现，以后可改为策略模式
+ */
+public class HttpSendHelper {
+
+    public static HttpResponseDto sendRequest(HttpRequestDto requestDto) {
+        HttpResponseDto responseDto;
+        // use httpclient
+        if (HTTP_CLIENT.equals(requestDto.getTechnology())) {
+            responseDto = HttpClientHelper.sendRequest(requestDto);
+        }
+        // use netty
+        else if (NETTY.equals(requestDto.getTechnology())) {
+            responseDto = NettyClientHelper.sendRequest(requestDto);
+        } else {
+            throw new StrategyNotFoundException("未找到发送技术策略.");
+        }
+        return responseDto;
+    }
+
+}

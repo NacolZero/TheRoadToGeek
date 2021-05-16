@@ -1,10 +1,10 @@
-package com.nacol.TheRoadToGeek.common.http.request_strategy;
+package com.nacol.TheRoadToGeek.common.http.param_strategy;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.impl.BodyParam;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.impl.FormParam;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.impl.GetParam;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.impl.XmlParam;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.impl.BodyParam;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.impl.FormParam;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.impl.GetParam;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.impl.XmlParam;
 
 import java.util.HashMap;
 import java.util.Map;

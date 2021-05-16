@@ -1,7 +1,8 @@
-package com.nacol.TheRoadToGeek.week_02.base_netty;
+package com.nacol.TheRoadToGeek.week_02.base_server_netty;
 
 import com.alibaba.fastjson.JSONObject;
-import io.netty.buffer.ByteBuf;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,17 +32,25 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
             //此处 相当于是路由 或者  controller mapping
             System.out.println("request param : " + fullHttpRequest.content().toString(CharsetUtil.UTF_8));
 
+
+            //返回数据初始化（因为没具体业务，暂时统一处理）
+            HttpResponseDto responseDto = new HttpResponseDto();
+            JSONObject resultData = new JSONObject();
+            responseDto.setResultData(resultData);
+
             //TODO 暂时调用一个方法，用参数区分。可修改为调用不通的业务。
-            JSONObject result = new JSONObject();
-            if (uri.equals("/test")) {
-                result.put("msg", "test.");
-                handle(fullHttpRequest, ctx, result.toJSONString());
-            } if (uri.equals("/pay")) {
-                result.put("msg", "buy a car.");
-                handle(fullHttpRequest, ctx, result.toJSONString());
+            if (uri.contains("/test")) {
+                resultData.put("msg", "成功发送 get 请求");
+                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
+            } else if (uri.equals("/pay")) {
+                resultData.put("msg", "buy a car.");
+                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
+            } else if (uri.equals("/login")) {
+                resultData.put("msg", "登录成功");
+                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
             } else {
-                result.put("msg", "other");
-                handle(fullHttpRequest, ctx, result.toJSONString());
+                resultData.put("msg", "uri 有误");
+                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
             }
         } catch (Exception e) {
             e.printStackTrace();

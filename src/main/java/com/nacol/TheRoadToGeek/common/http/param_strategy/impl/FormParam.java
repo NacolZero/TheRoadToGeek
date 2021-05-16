@@ -1,8 +1,8 @@
-package com.nacol.TheRoadToGeek.common.http.request_strategy.impl;
+package com.nacol.TheRoadToGeek.common.http.param_strategy.impl;
 
 import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.ParamStrategy;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;

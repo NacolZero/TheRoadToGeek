@@ -1,9 +1,9 @@
-package com.nacol.TheRoadToGeek.common.http.request_strategy.impl;
+package com.nacol.TheRoadToGeek.common.http.param_strategy.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpConstants;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.http.request_strategy.ParamStrategy;
+import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
