@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.common.http.send_param.impl;
+package com.nacol.TheRoadToGeek.common.http.client.httpclient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
@@ -6,7 +6,6 @@ import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategyFactory;
-import com.nacol.TheRoadToGeek.common.http.send_param.SendStrategy;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

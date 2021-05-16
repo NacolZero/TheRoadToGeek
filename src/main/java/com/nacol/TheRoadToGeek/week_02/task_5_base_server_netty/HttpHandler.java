@@ -1,7 +1,6 @@
-package com.nacol.TheRoadToGeek.week_02.base_server_netty;
+package com.nacol.TheRoadToGeek.week_02.task_5_base_server_netty;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;

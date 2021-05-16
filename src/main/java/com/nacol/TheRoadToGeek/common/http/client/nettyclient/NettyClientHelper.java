@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.common.http.send_param.impl;
+package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;

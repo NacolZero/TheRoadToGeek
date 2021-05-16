@@ -105,7 +105,7 @@ public class HttpRequestDto extends BaseSendDto {
         for (HttpSourceCacheEnum source : HttpSourceCacheEnum.values()) {
             if (source.serviceCode.equals(this.serviceCode)) {
 
-                this.url = "http://" + source.ip + ":" + source.port + "/" + source.uri;
+                this.url = "http://" + source.host + ":" + source.port + "/" + source.uri;
                 this.https = source.https;
                 this.httpType = source.httpType;
                 this.paramType = source.paramType;

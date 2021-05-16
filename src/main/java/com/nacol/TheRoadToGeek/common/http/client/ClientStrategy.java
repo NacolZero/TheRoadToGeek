@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.common.http.send_param;
+package com.nacol.TheRoadToGeek.common.http.client;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
@@ -9,7 +9,7 @@ import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
  * @Date 2021/5/16
  * @Description 发送消息策略
  */
-public interface SendStrategy {
+public interface ClientStrategy {
 
     public HttpResponseDto sendRequest(HttpRequestDto requestDto);
 

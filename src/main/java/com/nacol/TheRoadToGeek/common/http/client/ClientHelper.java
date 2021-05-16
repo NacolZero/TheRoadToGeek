@@ -1,10 +1,10 @@
-package com.nacol.TheRoadToGeek.common.http.send_param;
+package com.nacol.TheRoadToGeek.common.http.client;
 
 import com.nacol.TheRoadToGeek.common.Exception.StrategyNotFoundException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.common.http.send_param.impl.HttpClientHelper;
-import com.nacol.TheRoadToGeek.common.http.send_param.impl.NettyClientHelper;
+import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper;
+import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClientHelper;
 
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.HTTP_CLIENT;
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.NETTY;
@@ -16,7 +16,7 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.NETTY;
  * @Description http 发送助手
  * ps: 此类关注与解耦调用和被调用方的具体实现，以后可改为策略模式
  */
-public class HttpSendHelper {
+public class ClientHelper {
 
     public static HttpResponseDto sendRequest(HttpRequestDto requestDto) {
         HttpResponseDto responseDto;

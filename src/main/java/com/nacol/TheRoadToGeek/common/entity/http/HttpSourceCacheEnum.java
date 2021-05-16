@@ -8,23 +8,23 @@ package com.nacol.TheRoadToGeek.common.entity.http;
  */
 public enum HttpSourceCacheEnum {
 
-    TEST("test", "127.0.0.1", "9989", "test", false, "get", null),
-    PAY("pay", "127.0.0.1", "9989", "pay", false, "post", "form"),
-    LOGIN("login", "127.0.0.1", "9989", "login", false, "post", "body");
+    TEST("test", "127.0.0.1", 9989, "test", false, "get", null),
+    PAY("pay", "127.0.0.1", 9989, "pay", false, "post", "form"),
+    LOGIN("login", "127.0.0.1", 9989, "login", false, "post", "body");
 
     public String serviceCode;
-    public String ip;
-    public String port;
+    public String host;
+    public int port;
     public String uri;
     public boolean https;
     public String httpType;
     public String paramType;
 
 
-    HttpSourceCacheEnum(String serviceCode, String ip, String port, String uri,
+    HttpSourceCacheEnum(String serviceCode, String host, int port, String uri,
                         boolean https, String httpType, String paramType) {
         this.serviceCode = serviceCode;
-        this.ip = ip;
+        this.host = host;
         this.port = port;
         this.uri = uri;
         this.https = https;

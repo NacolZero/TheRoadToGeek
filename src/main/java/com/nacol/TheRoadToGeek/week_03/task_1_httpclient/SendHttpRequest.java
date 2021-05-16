@@ -1,8 +1,8 @@
-package com.nacol.TheRoadToGeek.week_02.http_client;
+package com.nacol.TheRoadToGeek.week_03.task_1_httpclient;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.common.http.send_param.HttpSendHelper;
+import com.nacol.TheRoadToGeek.common.http.client.ClientHelper;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,17 +21,17 @@ public class SendHttpRequest {
     public static void main(String[] args) throws IOException {
         //get: params
         HttpRequestDto getRequest = initBaseData().setServiceCode(TEST.serviceCode);
-        HttpResponseDto responseDto1 = HttpSendHelper.sendRequest(getRequest);
+        HttpResponseDto responseDto1 = ClientHelper.sendRequest(getRequest);
         System.out.println(responseDto1.getResultData());
 
         //post: form
         HttpRequestDto formRequest = initBaseData().setServiceCode(PAY.serviceCode);
-        HttpResponseDto responseDto2 = HttpSendHelper.sendRequest(formRequest);
+        HttpResponseDto responseDto2 = ClientHelper.sendRequest(formRequest);
         System.out.println(responseDto2.getResultData());
 
         //post: body(json)
         HttpRequestDto bodyRequest = initBaseData().setServiceCode(LOGIN.serviceCode);
-        HttpResponseDto responseDto3 = HttpSendHelper.sendRequest(bodyRequest);
+        HttpResponseDto responseDto3 = ClientHelper.sendRequest(bodyRequest);
         System.out.println(responseDto3.getResultData());
 
 
