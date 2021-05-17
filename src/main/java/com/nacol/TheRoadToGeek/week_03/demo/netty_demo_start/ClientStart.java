@@ -1,7 +1,7 @@
-package com.nacol.TheRoadToGeek.week_03.netty_demo_start;
+package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_start;
 
-import com.nacol.TheRoadToGeek.week_03.netty_demo_client.NettyClient;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_entity.RpcRequest;
+import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_client.NettyClient;
+import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcRequest;
 import io.netty.channel.Channel;
 
 import java.util.UUID;

@@ -1,6 +1,6 @@
-package com.nacol.TheRoadToGeek.week_03.netty_demo_start;
+package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_start;
 
-import com.nacol.TheRoadToGeek.week_03.netty_demo_server.NettyServer;
+import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_server.NettyServer;
 
 public class ServerStart {
 

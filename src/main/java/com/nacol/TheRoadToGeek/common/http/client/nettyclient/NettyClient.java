@@ -5,11 +5,13 @@ import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.Constant;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +22,7 @@ import java.util.Map;
  * @Date 2021/5/16
  * @Description Netty Client 小助手
  */
+@Log4j2
 public class NettyClient {
 
     /**就暂且用一个 map 缓存 bootstrap**/
@@ -27,41 +30,57 @@ public class NettyClient {
 
     public static HttpResponseDto sendRequest(HttpRequestDto httpRequestDto) {
         //获取/初始化 bootstrap (可解耦出去)
-        Bootstrap bootstrap = getBootStrap(httpRequestDto);
+        EventLoopGroup workerGroup  = new NioEventLoopGroup();
         // Start the client.
         try {
-            ChannelFuture f = bootstrap.connect(httpRequestDto.getHost(), httpRequestDto.getPort()).sync();
+            Bootstrap bootstrap = getBootStrap(httpRequestDto, workerGroup);
+            ChannelFuture future = bootstrap.connect(httpRequestDto.getHost(), httpRequestDto.getPort()).sync();
+            future.addListener(new ChannelFutureListener() {
+
+                @Override
+                public void operationComplete(ChannelFuture arg0) throws Exception {
+                    if (future.isSuccess()) {
+                        log.info("Nacol Server : 连接服务器成功");
+                    } else {
+                        log.info("Nacol Server : 连接服务器失败");
+                        future.cause().printStackTrace();
+                    }
+                }
+            });
+
             httpRequestDto.init();
-            f.channel().writeAndFlush(httpRequestDto);
-            f.channel().closeFuture().sync();
+            future.channel().writeAndFlush(httpRequestDto);
+            future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            workerGroup.shutdownGracefully();
         }
         return null;
     }
 
-    public static Bootstrap getBootStrap(HttpRequestDto httpRequestDto) {
+    public static Bootstrap getBootStrap(HttpRequestDto httpRequestDto, EventLoopGroup workerGroup) {
         Bootstrap bootstrap = bootstrapPool.get(httpRequestDto.getHostAndPort());
         if (bootstrap == null) {
             //TODO 可以根据不同的 host:port 生成不同的 bootstrap，绑定不同的 HttpClientInitializer， 绑定不通的 pipleLine
             //扩展点丢这里了，暂且偷偷懒使用同样类型的 bootstrap
-            bootstrap = initClient(httpRequestDto);
+            bootstrap = initClient(httpRequestDto, workerGroup);
         }
+        bootstrap.group(workerGroup);
         return bootstrap;
     }
 
     /**
      * 可根据不同的 httpRequestDto 可以生成不同的 bootstrap 才是正解呢
      */
-    public static Bootstrap initClient(HttpRequestDto httpRequestDto) {
+    public static Bootstrap initClient(HttpRequestDto httpRequestDto, EventLoopGroup workerGroup) {
         httpRequestDto.init();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
-        try {
-            bootstrap.group(workerGroup);
-            bootstrap.channel(NioSocketChannel.class);
-            bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-            bootstrap.handler(new HttpClientInitializer());
+
+        bootstrap.channel(NioSocketChannel.class);
+        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+        bootstrap.handler(new NacolClientIntitiallizer());
+//            bootstrap.handler(new HttpClientInitializer());
 //            bootstrap.handler(new SimpleClientInitializer());
 //            bootstrap.handler(new ChannelInitializer<SocketChannel>() {
 //                @Override
@@ -73,10 +92,7 @@ public class NettyClient {
 //                    ch.pipeline().addLast(new NettyHttpClientOutboundHandler());
 //                }
 //            });
-            bootstrapPool.put(httpRequestDto.getHostAndPort(), bootstrap);
-        } finally {
-//            workerGroup.shutdownGracefully();
-        }
+        bootstrapPool.put(httpRequestDto.getHostAndPort(), bootstrap);
         return bootstrap;
     }
 

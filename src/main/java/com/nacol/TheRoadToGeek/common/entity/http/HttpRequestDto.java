@@ -3,6 +3,7 @@ package com.nacol.TheRoadToGeek.common.entity.http;
 import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
 import org.springframework.util.Assert;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Map;
  * @Date 2021/5/15
  * @Description http 请求参数
  */
-public class HttpRequestDto extends BaseSendDto {
+public class HttpRequestDto extends BaseSendDto implements Serializable {
 
     public static final String HTTP_CLIENT = "httpclient";
     public static final String NETTY = "netty";

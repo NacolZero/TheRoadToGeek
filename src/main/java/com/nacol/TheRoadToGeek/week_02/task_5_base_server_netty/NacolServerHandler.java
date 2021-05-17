@@ -16,7 +16,7 @@ public class NacolServerHandler extends ChannelInboundHandlerAdapter{
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         HttpRequestDto request = (HttpRequestDto) msg;
-        log.info("接收到客户端信息: {} ", JSONObject.toJSONString(request));
+        log.info("Nacol Server 接收到客户端信息: {} ", JSONObject.toJSONString(request));
         handle(ctx, request);
     }
 

@@ -1,10 +1,10 @@
-package com.nacol.TheRoadToGeek.week_03.netty_demo_server;
+package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_server;
 
 
-import com.nacol.TheRoadToGeek.week_03.netty_demo_coder.RpcDecoder;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_coder.RpcEncoder;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_entity.RpcRequest;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_entity.RpcResponse;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder.RpcDecoder;
+import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder.RpcEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -14,7 +14,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class NettyServer {
+public class NettyServer2 {
 
     public void bind(int port) throws Exception {
 
@@ -30,9 +30,9 @@ public class NettyServer {
                     @Override
                     protected void initChannel(SocketChannel sh) throws Exception {
                         sh.pipeline()
-                                .addLast(new RpcDecoder(RpcRequest.class)) //解码request
-                                .addLast(new RpcEncoder(RpcResponse.class)) //编码response
-                                .addLast(new ServerHandler()); //使用ServerHandler类来处理接收到的消息
+                                .addLast(new RpcDecoder(HttpRequestDto.class)) //解码request
+                                .addLast(new RpcEncoder(HttpResponseDto.class)) //编码response
+                                .addLast(new ServerHandler2()); //使用ServerHandler类来处理接收到的消息
                     }
                 });
         //绑定监听端口，调用sync同步阻塞方法等待绑定操作完

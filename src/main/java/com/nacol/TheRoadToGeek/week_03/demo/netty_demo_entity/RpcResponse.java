@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.netty_demo_entity;
+package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity;
 
 public class RpcResponse {
 

@@ -2,9 +2,8 @@ package com.nacol.TheRoadToGeek.week_02.task_5_base_server_netty;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_coder.RpcDecoder;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_coder.RpcEncoder;
-import com.nacol.TheRoadToGeek.week_03.netty_demo_server.ServerHandler;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcDecoder;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcEncoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 

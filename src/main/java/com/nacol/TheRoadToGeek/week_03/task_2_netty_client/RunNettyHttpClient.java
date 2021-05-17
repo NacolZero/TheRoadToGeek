@@ -23,7 +23,7 @@ public class RunNettyHttpClient {
                 //使用 HttpClient 方式发送
                 .sendByNetty()
                 //业务类型（自定义）
-                .setServiceCode(HttpSourceCacheEnum.TEST.serviceCode)
+                .setServiceCode(HttpSourceCacheEnum.LOGIN.serviceCode)
 //                //自定义请求头（暂时未使用配置的方式）
 //                .setCustomHeaders(headers)
 //                //请求参数
