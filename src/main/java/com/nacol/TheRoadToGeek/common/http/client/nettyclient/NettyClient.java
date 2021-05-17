@@ -1,23 +1,18 @@
 package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
 
-import com.alibaba.fastjson.JSONObject;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.http.HttpRequestEncoder;
-import io.netty.handler.codec.http.HttpResponseDecoder;
+import io.netty.util.Constant;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.TEST;
 
 /**
  * @Author Nacol
@@ -36,8 +31,8 @@ public class NettyClient {
         // Start the client.
         try {
             ChannelFuture f = bootstrap.connect(httpRequestDto.getHost(), httpRequestDto.getPort()).sync();
-            f.channel().write(JSONObject.toJSONString(httpRequestDto));
-            f.channel().flush();
+            httpRequestDto.init();
+            f.channel().writeAndFlush(httpRequestDto);
             f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -67,6 +62,7 @@ public class NettyClient {
             bootstrap.channel(NioSocketChannel.class);
             bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
             bootstrap.handler(new HttpClientInitializer());
+//            bootstrap.handler(new SimpleClientInitializer());
 //            bootstrap.handler(new ChannelInitializer<SocketChannel>() {
 //                @Override
 //                public void initChannel(SocketChannel ch) throws Exception {

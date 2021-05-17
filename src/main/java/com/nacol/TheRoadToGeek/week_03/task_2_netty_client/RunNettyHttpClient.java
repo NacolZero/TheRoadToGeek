@@ -2,6 +2,7 @@ package com.nacol.TheRoadToGeek.week_03.task_2_netty_client;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum;
 import com.nacol.TheRoadToGeek.common.http.client.ClientHelper;
 
 public class RunNettyHttpClient {
@@ -22,7 +23,7 @@ public class RunNettyHttpClient {
                 //使用 HttpClient 方式发送
                 .sendByNetty()
                 //业务类型（自定义）
-                .setServiceCode("test")
+                .setServiceCode(HttpSourceCacheEnum.TEST.serviceCode)
 //                //自定义请求头（暂时未使用配置的方式）
 //                .setCustomHeaders(headers)
 //                //请求参数

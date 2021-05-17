@@ -15,6 +15,7 @@ public class RouterConfig {
     public static HttpRouter initRouter(String serverCode) {
         HttpRouter router;
         switch (serverCode) {
+            //TODO 可通过 serverCode 扩展
             default:
                 router = new RandomRouter();
         }

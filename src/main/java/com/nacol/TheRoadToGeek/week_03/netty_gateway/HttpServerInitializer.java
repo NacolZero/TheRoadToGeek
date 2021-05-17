@@ -1,6 +1,6 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway;
 
-import com.nacol.TheRoadToGeek.week_03.netty_gateway.inbound.InboundHandler;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.inbound_handler.InboundHandler;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.other.IpFilter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

@@ -25,6 +25,10 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new HttpServerCodec());
         //报文聚合器
         pipeline.addLast(new HttpObjectAggregator(1024 * 1024));
+//        //解码request
+//        pipeline.addLast(new RpcEncoder(HttpRequestDto.class));
+//        //编码response
+//        pipeline.addLast(new RpcEncoder(HttpResponseDto.class));
         //自己定义的 handler
         pipeline.addLast(new HttpServerHandler());
     }

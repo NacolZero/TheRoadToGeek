@@ -50,6 +50,7 @@ public class NettyHttpServer {
                     .handler(new LoggingHandler(LogLevel.INFO))
                     //指定我们另外一个类 ：流水线定义
                     .childHandler(new HttpServerInitializer());
+//                    .childHandler(new SimpleServerInitializer());
 
             Channel channel = bootstrap.bind(port).sync().channel();
             System.out.println("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1:" + port + '/');

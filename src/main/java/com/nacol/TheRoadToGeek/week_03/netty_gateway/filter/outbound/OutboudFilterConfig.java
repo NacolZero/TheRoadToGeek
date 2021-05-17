@@ -6,13 +6,14 @@ import java.util.Arrays;
  * @Author Nacol
  * @Email Nacol@sina.com
  * @Date 2021/5/17
- * @Description 可根据不同 ServerCode 给每次请求配置不同的出站 FilterSet
+ * @Description 最小实现
  */
 public class OutboudFilterConfig {
 
     public static OutFilterSet initFilters(String serverCode) {
         OutFilterSet outFilterSet;
         switch (serverCode) {
+            //TODO 可扩展：ServerCode 给每次请求配置不同的入站 FilterSet
             default:
                 outFilterSet = new OutFilterSet(Arrays.asList(new OutboundHeaderFilter(serverCode)));
         }

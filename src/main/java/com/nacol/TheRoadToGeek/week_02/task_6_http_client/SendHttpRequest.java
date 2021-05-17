@@ -20,19 +20,19 @@ public class SendHttpRequest {
 
     public static void main(String[] args) throws IOException {
         //get: params
-        HttpRequestDto getRequest = initBaseData().setServiceCode(TEST_3.serviceCode);
-        HttpResponseDto responseDto1 = ClientHelper.sendRequest(getRequest);
-        System.out.println(responseDto1.getResultData());
+//        HttpRequestDto requestDto = initBaseData().setServiceCode(TEST.serviceCode);
+//        HttpResponseDto responseDto1 = ClientHelper.sendRequest(requestDto);
+//        System.out.println(responseDto1.getResultData());
 
 //        //post: form
 //        HttpRequestDto formRequest = initBaseData().setServiceCode(PAY.serviceCode);
 //        HttpResponseDto responseDto2 = ClientHelper.sendRequest(formRequest);
 //        System.out.println(responseDto2.getResultData());
 //
-//        //post: body(json)
-//        HttpRequestDto bodyRequest = initBaseData().setServiceCode(LOGIN.serviceCode);
-//        HttpResponseDto responseDto3 = ClientHelper.sendRequest(bodyRequest);
-//        System.out.println(responseDto3.getResultData());
+        //post: body(json)
+        HttpRequestDto bodyRequest = initBaseData().setServiceCode(LOGIN.serviceCode);
+        HttpResponseDto responseDto3 = ClientHelper.sendRequest(bodyRequest);
+        System.out.println(responseDto3.getResultData());
 
 
 //        //xml

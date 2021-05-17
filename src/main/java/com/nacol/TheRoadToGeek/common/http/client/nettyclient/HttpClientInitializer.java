@@ -19,7 +19,7 @@ public class HttpClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new HttpObjectAggregator( 1024 * 1024));
         //http响应解压缩
         pipeline.addLast(new HttpContentDecompressor());
-        //业务handler
+        //自定义 clienthandler
         pipeline.addLast(new HttpClientHandler());
 
     }

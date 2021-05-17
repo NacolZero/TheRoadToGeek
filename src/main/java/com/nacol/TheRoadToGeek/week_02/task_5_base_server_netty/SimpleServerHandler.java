@@ -22,42 +22,42 @@ import static org.apache.coyote.http11.Constants.CONNECTION;
  * @Description http 对具体业务的处理
  */
 @Log4j2
-public class HttpServerHandler extends ChannelInboundHandlerAdapter {
+public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         log.info("channelRead start...");
         try {
-//            HttpRequestDto r = (HttpRequestDto)msg;
-//            System.out.println(r);
+            HttpRequestDto r = (HttpRequestDto)msg;
+            System.out.println(r);
             // msg 的本身是一个求情的包装类对象
             // FullHttpRequest 由 Netty 实现
 
-            FullHttpRequest fullHttpRequest = (FullHttpRequest)msg;
-            String uri = fullHttpRequest.uri();
-            //此处 相当于是路由 或者  controller mapping
-            String request = fullHttpRequest.content().toString(CharsetUtil.UTF_8);
-            System.out.println("request param : " + request);
-
-            //返回数据初始化（因为没具体业务，暂时统一处理）
-            HttpResponseDto responseDto = new HttpResponseDto();
-            JSONObject resultData = new JSONObject();
-            responseDto.setResultData(resultData);
-
-            //TODO 暂时调用一个方法，用参数区分。可修改为调用不通的业务。
-            if (uri.contains("/test")) {
-                resultData.put("msg", "成功发送 get 请求");
-                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
-            } else if (uri.equals("/pay")) {
-                resultData.put("msg", "buy a car.");
-                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
-            } else if (uri.equals("/login")) {
-                resultData.put("msg", "登录成功");
-                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
-            } else {
-                resultData.put("msg", "uri 有误");
-                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
-            }
+//            FullHttpRequest fullHttpRequest = (FullHttpRequest)msg;
+//            String uri = fullHttpRequest.uri();
+//            //此处 相当于是路由 或者  controller mapping
+//            String request = fullHttpRequest.content().toString(CharsetUtil.UTF_8);
+//            System.out.println("request param : " + request);
+//
+//            //返回数据初始化（因为没具体业务，暂时统一处理）
+//            HttpResponseDto responseDto = new HttpResponseDto();
+//            JSONObject resultData = new JSONObject();
+//            responseDto.setResultData(resultData);
+//
+//            //TODO 暂时调用一个方法，用参数区分。可修改为调用不通的业务。
+//            if (uri.contains("/test")) {
+//                resultData.put("msg", "成功发送 get 请求");
+//                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
+//            } else if (uri.equals("/pay")) {
+//                resultData.put("msg", "buy a car.");
+//                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
+//            } else if (uri.equals("/login")) {
+//                resultData.put("msg", "登录成功");
+//                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
+//            } else {
+//                resultData.put("msg", "uri 有误");
+//                handle(fullHttpRequest, ctx, JSONObject.toJSONString(responseDto));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

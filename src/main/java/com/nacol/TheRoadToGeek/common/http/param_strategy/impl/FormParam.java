@@ -25,6 +25,7 @@ public class FormParam implements ParamStrategy {
     @Override
     public void setParam(HttpUriRequest uriRequest, HttpRequestDto httpRequestDto) {
         Object sendParam = httpRequestDto.getParam();
+//        Object sendParam = httpRequestDto;
         HttpPost httpPost = (HttpPost) uriRequest;
         if (sendParam instanceof Map) {
             List<NameValuePair> pairs = new ArrayList<>();

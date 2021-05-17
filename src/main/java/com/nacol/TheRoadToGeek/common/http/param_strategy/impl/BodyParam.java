@@ -21,11 +21,12 @@ public class BodyParam implements ParamStrategy {
 
     @Override
     public void setParam(HttpUriRequest uriRequest, HttpRequestDto httpRequestDto) {
-        Object sendParam = httpRequestDto.getParam();
+        Object sendParam = httpRequestDto;
+//        Object sendParam = httpRequestDto.getParam();
         HttpPost httpPost = (HttpPost) uriRequest;
         StringEntity entityParams;
         if (sendParam instanceof String) {
-            entityParams = new StringEntity(sendParam.toString(), StandardCharsets.UTF_8);
+            entityParams = new StringEntity(httpRequestDto.toString(), StandardCharsets.UTF_8);
             httpPost.addHeader(HttpConstants.CONTENT_TYPE, HttpConstants.APPLICATION_JSON);
         } else {
             entityParams = new StringEntity(JSON.toJSONString(sendParam), StandardCharsets.UTF_8);

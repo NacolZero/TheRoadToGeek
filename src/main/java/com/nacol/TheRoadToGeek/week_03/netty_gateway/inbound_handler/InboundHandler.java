@@ -1,8 +1,8 @@
-package com.nacol.TheRoadToGeek.week_03.netty_gateway.inbound;
+package com.nacol.TheRoadToGeek.week_03.netty_gateway.inbound_handler;
 
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound.InFilterSet;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound.InboudFilterConfig;
-import com.nacol.TheRoadToGeek.week_03.netty_gateway.outbound.Exchanger;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.outbound_handler.Exchanger;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.*;

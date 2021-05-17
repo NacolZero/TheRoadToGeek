@@ -17,19 +17,26 @@ public class HttpClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        //封装请求信息
-        URI uri = new URI("/test");
-        String msg = "Hello";
-        DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1,
-                HttpMethod.GET, uri.toASCIIString(), Unpooled.wrappedBuffer(msg.getBytes(CharsetUtil.UTF_8)));
+//        //封装请求信息
+//        URI uri = new URI("/test");
+//        String msg = "Hello";
+//        DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1,
+//                HttpMethod.GET, uri.toASCIIString(), Unpooled.wrappedBuffer(msg.getBytes(CharsetUtil.UTF_8)));
+//
+//        //构建http请求
+//        request.headers().set(HttpHeaderNames.HOST, TEST.host);
+//        request.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
+//        request.headers().set(HttpHeaderNames.CONTENT_LENGTH, request.content().readableBytes());
+//
+//        // 发送http请求
+//        ctx.writeAndFlush(request);
+        super.channelActive(ctx);
+    }
 
-        //构建http请求
-        request.headers().set(HttpHeaderNames.HOST, TEST.host);
-        request.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
-        request.headers().set(HttpHeaderNames.CONTENT_LENGTH, request.content().readableBytes());
-
-        // 发送http请求
-        ctx.writeAndFlush(request);
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("连接关闭! ");
+        super.channelInactive(ctx);
     }
 
     @Override
