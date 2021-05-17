@@ -1,9 +1,6 @@
 package com.nacol.TheRoadToGeek.common.entity.http;
 
 
-import com.alibaba.fastjson.JSONObject;
-import lombok.ToString;
-
 import java.io.Serializable;
 
 /**

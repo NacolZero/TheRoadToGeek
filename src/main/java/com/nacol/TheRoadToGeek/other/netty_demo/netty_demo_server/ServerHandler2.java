@@ -1,31 +1,31 @@
-package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_server;
+package com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_server;
 
 
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcRequest;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcResponse;
+import com.alibaba.fastjson.JSONObject;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import java.util.UUID;
+import lombok.extern.log4j.Log4j2;
 
-public class ServerHandler extends ChannelInboundHandlerAdapter{
+@Log4j2
+public class ServerHandler2 extends ChannelInboundHandlerAdapter{
 
     //接受client发送的消息
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        RpcRequest request = (RpcRequest) msg;
-        System.out.println("接收到客户端信息:" + request.toString());
+        HttpRequestDto request = (HttpRequestDto) msg;
+        log.info("接收到客户端信息 2 : {} ", JSONObject.toJSONString(request));
         //返回的数据结构
-        RpcResponse response = new RpcResponse();
-        response.setId(UUID.randomUUID().toString());
-        response.setData("server响应结果");
-        response.setStatus(1);
+        HttpResponseDto response = new HttpResponseDto();
+        response.setResultData("222 收到");
         ctx.writeAndFlush(response);
     }
 
     //通知处理器最后的channelRead()是当前批处理中的最后一条消息时调用
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("服务端接收数据完毕..");
+        System.out.println("服务端接收数据完毕2222..");
         ctx.flush();
     }
 

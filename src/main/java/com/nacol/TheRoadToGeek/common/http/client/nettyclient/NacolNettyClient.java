@@ -1,28 +1,23 @@
-package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_client;
+package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
 
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder.RpcDecoder;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder.RpcEncoder;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcRequest;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcResponse;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcDecoder;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcEncoder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-public class NettyClient {
+public class NacolNettyClient {
 
     private final String host;
     private final int port;
     private Channel channel;
 
     //连接服务端的端口号地址和端口号
-    public NettyClient(String host, int port) {
+    public NacolNettyClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
@@ -37,9 +32,9 @@ public class NettyClient {
                     public void initChannel(SocketChannel ch) throws Exception {
                         System.out.println("正在连接中...");
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new RpcEncoder(RpcRequest.class)); //编码request
-                        pipeline.addLast(new RpcDecoder(RpcResponse.class)); //解码response
-                        pipeline.addLast(new ClientHandler()); //客户端处理类
+                        pipeline.addLast(new RpcEncoder(HttpRequestDto.class)); //编码request
+                        pipeline.addLast(new RpcDecoder(HttpResponseDto.class)); //解码response
+                        pipeline.addLast(new NacolClientHandler()); //客户端处理类
 
                     }
                 });

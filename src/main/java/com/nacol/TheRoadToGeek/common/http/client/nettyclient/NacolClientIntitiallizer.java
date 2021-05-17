@@ -1,7 +1,7 @@
 package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
 
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcRequest;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcResponse;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_entity.RpcRequest;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_entity.RpcResponse;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcDecoder;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcEncoder;
 import io.netty.channel.ChannelInitializer;

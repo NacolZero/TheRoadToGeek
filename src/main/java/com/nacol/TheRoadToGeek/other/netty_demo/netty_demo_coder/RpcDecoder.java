@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder;
+package com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_coder;
 
 import com.alibaba.fastjson.JSON;
 import io.netty.buffer.ByteBuf;

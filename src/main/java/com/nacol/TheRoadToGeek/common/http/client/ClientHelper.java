@@ -3,9 +3,9 @@ package com.nacol.TheRoadToGeek.common.http.client;
 import com.nacol.TheRoadToGeek.common.Exception.StrategyNotFoundException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper;
 import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper2;
-import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClient;
+import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NacolNettyClientHelper;
+import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClientHelper;
 
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.HTTP_CLIENT;
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.NETTY;
@@ -23,11 +23,13 @@ public class ClientHelper {
         HttpResponseDto responseDto;
         // use httpclient
         if (HTTP_CLIENT.equals(requestDto.getTechnology())) {
+//            responseDto = HttpClientHelper.sendRequest(requestDto);
             responseDto = HttpClientHelper2.sendRequest(requestDto);
         }
         // use netty
         else if (NETTY.equals(requestDto.getTechnology())) {
-            responseDto = NettyClient.sendRequest(requestDto);
+//            responseDto = NettyClientHelper.sendRequest(requestDto);
+            responseDto = NacolNettyClientHelper.sendRequest(requestDto);
         } else {
             throw new StrategyNotFoundException("未找到发送技术策略.");
         }

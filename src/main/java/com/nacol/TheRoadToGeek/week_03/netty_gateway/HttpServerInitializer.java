@@ -1,5 +1,9 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway;
 
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcDecoder;
+import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcEncoder;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.inbound_handler.InboundHandler;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.other.IpFilter;
 import io.netty.channel.ChannelInitializer;
@@ -29,14 +33,16 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel channel) {
         //责任链模式 ChannelHandlerContext
         //创建 pipeline
-        ChannelPipeline pipeline = channel.pipeline();
+        channel.pipeline()
         //ip 过滤器
-        pipeline.addFirst(new RuleBasedIpFilter(new IpFilter()));
-        //httpServer 编码器
-        pipeline.addLast(new HttpServerCodec());
-        //报文聚合器
-        pipeline.addLast(new HttpObjectAggregator(1024 * 1024));
+            .addFirst(new RuleBasedIpFilter(new IpFilter()))
+            .addLast(new RpcDecoder(HttpRequestDto.class)) //解码request
+            .addLast(new RpcEncoder(HttpResponseDto.class)) //编码response
+//        //httpServer 编码器
+//        pipeline.addLast(new HttpServerCodec());
+//        //报文聚合器
+//        pipeline.addLast(new HttpObjectAggregator(1024 * 1024));
         //自己定义的 handler
-        pipeline.addLast(new InboundHandler(this.serverCode));
+            .addLast(new InboundHandler(this.serverCode));
     }
 }

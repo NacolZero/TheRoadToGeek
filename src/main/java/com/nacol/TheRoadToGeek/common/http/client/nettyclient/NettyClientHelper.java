@@ -23,7 +23,7 @@ import java.util.Map;
  * @Description Netty Client 小助手
  */
 @Log4j2
-public class NettyClient {
+public class NettyClientHelper {
 
     /**就暂且用一个 map 缓存 bootstrap**/
     private static final Map<String, Bootstrap> bootstrapPool = new HashMap<>();

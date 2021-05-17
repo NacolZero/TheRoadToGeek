@@ -1,5 +1,6 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound;
 
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 
@@ -19,8 +20,8 @@ public class InFilterSet {
         this.filters = filters;
     }
 
-    public void batchFilter(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx) {
-        filters.forEach(f->f.filter(fullHttpRequest, ctx));
+    public void batchFilter(HttpRequestDto request, ChannelHandlerContext ctx) {
+        filters.forEach(f->f.filter(request, ctx));
     }
 
 }

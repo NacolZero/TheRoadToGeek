@@ -1,5 +1,8 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.outbound_handler;
 
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper;
+import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClientHelper;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.Router.HttpRouter;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.GatewayConfig;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.NamedThreadFactory;
@@ -40,18 +43,19 @@ public class Exchanger extends ChannelOutboundHandlerAdapter {
                 .stream().map(this::formatUrl)
                 .collect(Collectors.toList());
 
-
     }
 
     private String formatUrl(String backend) {
         return backend.endsWith("/")?backend.substring(0,backend.length()-1):backend;
     }
 
-    public void route(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx) {
-        System.out.println("-------------------------------handle : " + System.currentTimeMillis());
+    public void route(HttpRequestDto fullHttpRequest, ChannelHandlerContext ctx) {
+        //负债均衡
         String backendUrl = router.route(this.hosts);
-        final String url = backendUrl + fullHttpRequest.uri();
+        final String url = backendUrl + "/" +fullHttpRequest.getUri();
         //这里转发给其他服务即可
+        fullHttpRequest.setUrl(url);
+        HttpClientHelper.sendRequest(fullHttpRequest);
     }
 
 

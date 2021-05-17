@@ -1,28 +1,32 @@
-package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_server;
+package com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_server;
 
 
-import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_entity.RpcRequest;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_entity.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import java.util.UUID;
 
-public class ServerHandler2 extends ChannelInboundHandlerAdapter{
+
+public class ServerHandler extends ChannelInboundHandlerAdapter{
 
     //接受client发送的消息
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        HttpRequestDto request = (HttpRequestDto) msg;
-        System.out.println("接收到客户端信息:" + request.toString());
+        RpcRequest request = (RpcRequest) msg;
+        System.out.println("接收到客户端信息1:" + request.toString());
         //返回的数据结构
-        HttpResponseDto response = new HttpResponseDto();
-        response.setResultData("222 收到");
+        RpcResponse response = new RpcResponse();
+        response.setId(UUID.randomUUID().toString());
+        response.setData("server响应结果1");
+        response.setStatus(1);
         ctx.writeAndFlush(response);
     }
 
     //通知处理器最后的channelRead()是当前批处理中的最后一条消息时调用
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("服务端接收数据完毕..");
+        System.out.println("服务端接收数据完毕1..");
         ctx.flush();
     }
 

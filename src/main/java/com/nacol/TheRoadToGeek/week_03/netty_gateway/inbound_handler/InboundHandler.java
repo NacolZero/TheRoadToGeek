@@ -1,5 +1,7 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.inbound_handler;
 
+import com.alibaba.fastjson.JSON;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound.InFilterSet;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound.InboudFilterConfig;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.outbound_handler.Exchanger;
@@ -33,16 +35,12 @@ public class InboundHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         try {
-            // msg 的本身是一个求情的包装类对象
-            // FullHttpRequest 由 Netty 实现
-            FullHttpRequest fullHttpRequest = (FullHttpRequest)msg;
-            String uri = fullHttpRequest.uri();
-            //此处 相当于是路由 或者  controller mapping
-            log.info("request param : {}", fullHttpRequest.content().toString(CharsetUtil.UTF_8));
+            HttpRequestDto request = (HttpRequestDto)msg;
+            log.info("gataway get request : {}", JSON.toJSONString(request));
             //进站过滤处理
-            inFilterSet.batchFilter(fullHttpRequest, ctx);
+            inFilterSet.batchFilter(request, ctx);
             //转发给 outboundHandler 分发消息
-            exchanger.route(fullHttpRequest, ctx);
+            exchanger.route(request, ctx);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

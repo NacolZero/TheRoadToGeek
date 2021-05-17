@@ -1,9 +1,13 @@
 package com.nacol.TheRoadToGeek.common.entity.http;
 
 import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
+import lombok.Data;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,6 +16,9 @@ import java.util.Map;
  * @Date 2021/5/15
  * @Description http 请求参数
  */
+@ToString
+@Data
+@Accessors(chain = true)
 public class HttpRequestDto extends BaseSendDto implements Serializable {
 
     public static final String HTTP_CLIENT = "httpclient";
@@ -52,7 +59,7 @@ public class HttpRequestDto extends BaseSendDto implements Serializable {
     /**
      * 自定义请求头
      */
-    private Map<String, String> customHeaders;
+    private Map<String, String> customHeaders = new HashMap<>();
 
     /**
      * 请求参数
@@ -117,10 +124,12 @@ public class HttpRequestDto extends BaseSendDto implements Serializable {
         Assert.notNull(this.serviceCode, "serviceCode cannot be empty.");
         for (HttpSourceCacheEnum source : HttpSourceCacheEnum.values()) {
             if (source.serviceCode.equals(this.serviceCode)) {
-                this.host = source.host;
-                this.port = source.port;
+                if (url == null) {
+                    this.host = source.host;
+                    this.port = source.port;
+                    this.url = "http://" + source.host + ":" + source.port + "/" + source.uri;
+                }
                 this.uri = source.uri;
-                this.url = "http://" + source.host + ":" + source.port + "/" + source.uri;
                 this.https = source.https;
                 this.httpType = source.httpType;
                 this.paramType = source.paramType;

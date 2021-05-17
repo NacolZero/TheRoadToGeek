@@ -1,10 +1,10 @@
-package com.nacol.TheRoadToGeek.week_03.demo.netty_demo_server;
+package com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_server;
 
 
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder.RpcDecoder;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_coder.RpcEncoder;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcRequest;
-import com.nacol.TheRoadToGeek.week_03.demo.netty_demo_entity.RpcResponse;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_coder.RpcDecoder;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_coder.RpcEncoder;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_entity.RpcRequest;
+import com.nacol.TheRoadToGeek.other.netty_demo.netty_demo_entity.RpcResponse;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

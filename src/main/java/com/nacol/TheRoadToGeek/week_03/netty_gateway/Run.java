@@ -5,7 +5,7 @@ import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.GatewayConfig;
 public class Run {
 
     public static void main(String[] args) {
-        run(9988, GatewayConfig.CARGO);
+        run(9989, GatewayConfig.CARGO);
     }
 
     public static void run(int port, String serverName) {
