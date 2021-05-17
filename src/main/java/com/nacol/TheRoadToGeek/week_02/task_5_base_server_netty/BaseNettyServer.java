@@ -17,7 +17,7 @@ import io.netty.handler.logging.LoggingHandler;
  * @Date 2021/5/11
  * @Description Netty 服务端启动类
  */
-public class NettyHttpServer {
+public class BaseNettyServer {
 
     public static void main(String[] args) throws InterruptedException {
         int port = 9989;
@@ -48,9 +48,10 @@ public class NettyHttpServer {
             bootstrap.group(bosssGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    //指定我们另外一个类 ：流水线定义
-                    .childHandler(new HttpServerInitializer());
-//                    .childHandler(new SimpleServerInitializer());
+//                    //指定我们另外一个类 ：流水线定义
+//                    .childHandler(new HttpServerInitializer());
+                    //
+                    .childHandler(new NacolServerInitalizer());
 
             Channel channel = bootstrap.bind(port).sync().channel();
             System.out.println("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1:" + port + '/');

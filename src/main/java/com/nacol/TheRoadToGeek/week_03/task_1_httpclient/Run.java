@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.TEST_2;
+import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.PAY;
 
 /**
  * @Author Nacol
@@ -20,7 +20,7 @@ public class Run {
 
     public static void main(String[] args) throws IOException {
         //get: params
-        HttpRequestDto getRequest = initBaseData().setServiceCode(TEST_2.serviceCode);
+        HttpRequestDto getRequest = initBaseData().setServiceCode(PAY.serviceCode);
         HttpResponseDto responseDto1 = ClientHelper.sendRequest(getRequest);
         System.out.println(responseDto1.getResultData());
 

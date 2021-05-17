@@ -21,8 +21,7 @@ public class BodyParam implements ParamStrategy {
 
     @Override
     public void setParam(HttpUriRequest uriRequest, HttpRequestDto httpRequestDto) {
-        Object sendParam = httpRequestDto;
-//        Object sendParam = httpRequestDto.getParam();
+        Object sendParam = httpRequestDto.getParam();
         HttpPost httpPost = (HttpPost) uriRequest;
         StringEntity entityParams;
         if (sendParam instanceof String) {

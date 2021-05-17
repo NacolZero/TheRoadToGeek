@@ -30,6 +30,8 @@ public class HttpRequestDto extends BaseSendDto {
 
     private int port;
 
+    private String uri;
+
     /**
      * 访问地址
      */
@@ -116,6 +118,7 @@ public class HttpRequestDto extends BaseSendDto {
             if (source.serviceCode.equals(this.serviceCode)) {
                 this.host = source.host;
                 this.port = source.port;
+                this.uri = source.uri;
                 this.url = "http://" + source.host + ":" + source.port + "/" + source.uri;
                 this.https = source.https;
                 this.httpType = source.httpType;
@@ -174,5 +177,9 @@ public class HttpRequestDto extends BaseSendDto {
 
     public String getHostAndPort(){
         return this.host + this.port;
+    }
+
+    public String getUri() {
+        return uri;
     }
 }

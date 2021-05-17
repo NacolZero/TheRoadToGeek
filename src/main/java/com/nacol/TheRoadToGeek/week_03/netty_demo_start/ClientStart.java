@@ -17,7 +17,7 @@ public class ClientStart {
         //消息体
         RpcRequest request = new RpcRequest();
         request.setId(UUID.randomUUID().toString());
-        request.setData("client.message");
+        request.setData("client.message123123123213");
         //channel对象可保存在map中，供其它地方发送消息
         channel.writeAndFlush(request);
     }
