@@ -1,8 +1,10 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.outbound;
 
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.outbound.HttpOutboundFilter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpResponse;
+import org.apache.http.protocol.ResponseDate;
 
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class OutFilterSet {
         this.filters = filters;
     }
 
-    public void batchFilter(FullHttpResponse fullHttpResponse, ChannelHandlerContext ctx) {
-        filters.forEach(f->f.filter(fullHttpResponse, ctx));
+    public void batchFilter(HttpResponseDto responseDto, ChannelHandlerContext ctx) {
+        filters.forEach(f->f.filter(responseDto, ctx));
     }
 
 }

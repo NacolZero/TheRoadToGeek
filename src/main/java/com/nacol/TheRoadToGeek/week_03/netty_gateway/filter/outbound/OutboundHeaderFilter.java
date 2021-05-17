@@ -1,5 +1,7 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.outbound;
 
+import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpResponse;
 
@@ -14,8 +16,8 @@ public class OutboundHeaderFilter implements HttpOutboundFilter{
     }
 
     @Override
-    public void filter(FullHttpResponse fullHttpResponse, ChannelHandlerContext ctx) {
-        fullHttpResponse.headers().set(serverCode + "responeseid", UUID.randomUUID());
+    public void filter(HttpResponseDto responseDto, ChannelHandlerContext ctx) {
+        responseDto.getCustomHeaders().put(serverCode + "responeseid", UUID.randomUUID().toString());
     }
 
 }

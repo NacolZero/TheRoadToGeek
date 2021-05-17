@@ -2,6 +2,8 @@ package com.nacol.TheRoadToGeek.common.entity.http;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author Nacol  
@@ -15,6 +17,7 @@ public class HttpResponseDto extends BaseSendDto implements Serializable {
 
     private Object resultData;
 
+    private Map<String, String> customHeaders = new HashMap<>();
 
     public Object getResultData() {
         return resultData;
@@ -32,5 +35,13 @@ public class HttpResponseDto extends BaseSendDto implements Serializable {
     public HttpResponseDto setStatus(int status) {
         this.status = status;
         return this;
+    }
+
+    public Map<String, String> getCustomHeaders() {
+        return customHeaders;
+    }
+
+    public void setCustomHeaders(Map<String, String> customHeaders) {
+        this.customHeaders = customHeaders;
     }
 }
