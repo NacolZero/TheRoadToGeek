@@ -31,7 +31,6 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
             //此处 相当于是路由 或者  controller mapping
             System.out.println("request param : " + fullHttpRequest.content().toString(CharsetUtil.UTF_8));
 
-
             //返回数据初始化（因为没具体业务，暂时统一处理）
             HttpResponseDto responseDto = new HttpResponseDto();
             JSONObject resultData = new JSONObject();

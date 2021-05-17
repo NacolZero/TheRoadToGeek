@@ -16,7 +16,7 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.*;
  * @Date 2021/5/16
  * @Description 具体实现在 package com.nacol.TheRoadToGeek.common.http.send_param.impl 中
  */
-public class SendHttpRequest {
+public class SendHttpClientRequest {
 
     public static void main(String[] args) throws IOException {
         //get: params

@@ -10,7 +10,10 @@ public enum HttpSourceCacheEnum {
 
     TEST("test", "127.0.0.1", 9989, "test", false, "get", null),
     PAY("pay", "127.0.0.1", 9989, "pay", false, "post", "form"),
-    LOGIN("login", "127.0.0.1", 9989, "login", false, "post", "body");
+    LOGIN("login", "127.0.0.1", 9989, "login", false, "post", "body"),
+    TEST_2("test2", "127.0.0.1", 9988, "test", false, "get", null),
+    TEST_3("test3", "127.0.0.1", 9988, "test", false, "get", null)
+    ;
 
     public String serviceCode;
     public String host;

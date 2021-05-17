@@ -4,7 +4,7 @@ import com.nacol.TheRoadToGeek.common.Exception.StrategyNotFoundException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper;
-import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClientHelper;
+import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClient;
 
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.HTTP_CLIENT;
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.NETTY;
@@ -26,7 +26,7 @@ public class ClientHelper {
         }
         // use netty
         else if (NETTY.equals(requestDto.getTechnology())) {
-            responseDto = NettyClientHelper.sendRequest(requestDto);
+            responseDto = NettyClient.sendRequest(requestDto);
         } else {
             throw new StrategyNotFoundException("未找到发送技术策略.");
         }

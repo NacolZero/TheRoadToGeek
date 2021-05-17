@@ -25,7 +25,7 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpConstants.*;
  * @Email Nacol@sina.com
  * @Date 2021/5/16
  * @Description Http 小助手
- * ps: 该类只应该组织流程，因为 demo 暂不把这些执行流程完全解耦出去.
+ * ps: 该类只应该组织流程，当复杂度提升后可把具体执行的流程完全解耦出去.
  */
 public class HttpClientHelper {
 
@@ -49,7 +49,7 @@ public class HttpClientHelper {
 
     private static HttpUriRequest initRequest(HttpRequestDto httpRequestDto) {
         //拼接通信地址
-        httpRequestDto.initUrl();
+        httpRequestDto.init();
         //初始化请求
         HttpUriRequest request;
         if (HTTP_POST.equals(httpRequestDto.getHttpType())) {

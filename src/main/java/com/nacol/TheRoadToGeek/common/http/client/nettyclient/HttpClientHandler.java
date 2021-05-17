@@ -16,21 +16,7 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.TES
 public class HttpClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        //通过编解码器把byteBuf解析成FullHttpResponse
-        if (msg instanceof FullHttpResponse) {
-            FullHttpResponse httpResponse = (FullHttpResponse) msg;
-            HttpResponseStatus status = httpResponse.status();
-            ByteBuf content = httpResponse.content();
-            log.info("客户端接收响应信息：");
-            log.info("status:{},content:{}", status, content.toString(CharsetUtil.UTF_8));
-            httpResponse.release();
-        }
-    }
-
-    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
         //封装请求信息
         URI uri = new URI("/test");
         String msg = "Hello";
@@ -45,4 +31,18 @@ public class HttpClientHandler extends ChannelInboundHandlerAdapter {
         // 发送http请求
         ctx.writeAndFlush(request);
     }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        //通过编解码器把byteBuf解析成FullHttpResponse
+        if (msg instanceof FullHttpResponse) {
+            FullHttpResponse httpResponse = (FullHttpResponse) msg;
+            HttpResponseStatus status = httpResponse.status();
+            ByteBuf content = httpResponse.content();
+            log.info("客户端接收响应信息：");
+            log.info("status:{},content:{}", status, content.toString(CharsetUtil.UTF_8));
+            httpResponse.release();
+        }
+    }
+
 }

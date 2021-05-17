@@ -26,6 +26,10 @@ public class HttpRequestDto extends BaseSendDto {
      */
     private String serviceCode;
 
+    private String host;
+
+    private int port;
+
     /**
      * 访问地址
      */
@@ -69,7 +73,13 @@ public class HttpRequestDto extends BaseSendDto {
     public HttpRequestDto() {
     }
 
+    public String getHost() {
+        return this.host;
+    }
 
+    public int getPort() {
+        return this.port;
+    }
 
     public String getParamType() {
         return this.paramType;
@@ -100,11 +110,12 @@ public class HttpRequestDto extends BaseSendDto {
      * @Description 初始化请求 url,
      * 枚举不可修改 + 未设置 set 方法 = 保证了 url 的不可修改。
      */
-    public HttpRequestDto initUrl() {
+    public HttpRequestDto init() {
         Assert.notNull(this.serviceCode, "serviceCode cannot be empty.");
         for (HttpSourceCacheEnum source : HttpSourceCacheEnum.values()) {
             if (source.serviceCode.equals(this.serviceCode)) {
-
+                this.host = source.host;
+                this.port = source.port;
                 this.url = "http://" + source.host + ":" + source.port + "/" + source.uri;
                 this.https = source.https;
                 this.httpType = source.httpType;
@@ -161,4 +172,7 @@ public class HttpRequestDto extends BaseSendDto {
         return this;
     }
 
+    public String getHostAndPort(){
+        return this.host + this.port;
+    }
 }

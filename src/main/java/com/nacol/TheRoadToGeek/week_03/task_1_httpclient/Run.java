@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02.task_6_http_client;
+package com.nacol.TheRoadToGeek.week_03.task_1_httpclient;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.*;
+import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.TEST_2;
 
 /**
  * @Author Nacol
@@ -16,11 +16,11 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.*;
  * @Date 2021/5/16
  * @Description 具体实现在 package com.nacol.TheRoadToGeek.common.http.send_param.impl 中
  */
-public class SendHttpRequest {
+public class Run {
 
     public static void main(String[] args) throws IOException {
         //get: params
-        HttpRequestDto getRequest = initBaseData().setServiceCode(TEST_3.serviceCode);
+        HttpRequestDto getRequest = initBaseData().setServiceCode(TEST_2.serviceCode);
         HttpResponseDto responseDto1 = ClientHelper.sendRequest(getRequest);
         System.out.println(responseDto1.getResultData());
 

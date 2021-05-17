@@ -17,6 +17,7 @@
 		<java.version>1.8</java.version>
 		<fastjson.version>1.2.47</fastjson.version>
 		<commons.collections4.version>4.2</commons.collections4.version>
+		<httpasyncclient.version>4.1.4</httpasyncclient.version>
 	</properties>
 
 	<dependencies>
@@ -50,7 +51,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
+			<artifactId>httpasyncclient</artifactId>
+			<version>${httpasyncclient.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
