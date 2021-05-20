@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.pool;
+package com.nacol.TheRoadToGeek.week_03.other.pool;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
@@ -14,6 +14,5 @@ public class FixPool {
             HttpResponseDto resp = (HttpResponseDto)result.get();
             System.out.println(resp.getStatus());
         }
-
     }
 }

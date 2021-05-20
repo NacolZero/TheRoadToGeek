@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.thread;
+package com.nacol.TheRoadToGeek.week_03.other.thread;
 
 public class ThreadRun {
 
