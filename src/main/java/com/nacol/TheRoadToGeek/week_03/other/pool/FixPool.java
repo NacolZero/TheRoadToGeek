@@ -23,10 +23,12 @@ public class FixPool {
             results3.add(r2);
         }
 
+        //  第 1 个 future.get() 正常
         for (Future<?> future : results2) {
             HttpResponseDto rsp = (HttpResponseDto)future.get();
             System.out.println(rsp);
         }
+        //  第 2 个 future.get() 抛错
         for (Future<?> result : results) {
             List<HttpResponseDto> resps = (List<HttpResponseDto>)result.get();
             for (HttpResponseDto resp : resps) {
@@ -34,6 +36,7 @@ public class FixPool {
             }
         }
         System.out.println("----------");
+        //  第 3 个 future.get() 因为主线程抛错了，则无法执行
         for (Future<?> future : results3) {
             try {
                 HttpResponseDto rsp = (HttpResponseDto)future.get();
