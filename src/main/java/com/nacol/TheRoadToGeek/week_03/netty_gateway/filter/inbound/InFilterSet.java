@@ -10,7 +10,7 @@ import java.util.List;
  * @Author Nacol
  * @Email Nacol@sina.com
  * @Date 2021/5/17
- * @Description 批量 filter 处理
+ * @Description 入站 filter 集合处理器
  */
 public class InFilterSet {
 
