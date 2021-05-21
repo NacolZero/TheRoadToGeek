@@ -1,6 +1,8 @@
 package com.nacol.TheRoadToGeek.common.entity.http;
 
 
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,7 @@ import java.util.Map;
  * @Date 2021/5/15  
  * @Description http 返回
  */
+@ToString
 public class HttpResponseDto extends BaseSendDto implements Serializable {
 
     private int status;

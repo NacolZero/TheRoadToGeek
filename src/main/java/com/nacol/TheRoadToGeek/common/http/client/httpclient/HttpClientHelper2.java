@@ -8,6 +8,7 @@ import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategyFactory;
+import com.nacol.TheRoadToGeek.week_03.task_6_gateway_pool.GateWayThreadPool;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -21,6 +22,8 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpConstants.*;
 
@@ -45,7 +48,8 @@ public class HttpClientHelper2 {
         //STEP 初始化参数
         initParams(request, httpRequestDto);
         //STEP 执行请求
-        HttpResponseDto result = executeRequest(request, httpRequestDto);
+        HttpResponseDto result = submitRequest(request, httpRequestDto);//多线程
+//        HttpResponseDto result = executeRequest(request, httpRequestDto);//傻呆呆单线程
         //STEP 日志(不该写这里)
         recordLog(httpRequestDto);
         return result;
@@ -66,6 +70,18 @@ public class HttpClientHelper2 {
         }
         StringEntity entityParams = new StringEntity(JSON.toJSONString(httpRequestDto), StandardCharsets.UTF_8);
         request.setEntity(entityParams);
+    }
+
+    private static HttpResponseDto submitRequest(HttpPost request, HttpRequestDto httpRequestDto) {
+        HttpResponseDto responseDto = null;
+        try {
+            responseDto = (HttpResponseDto)GateWayThreadPool.submit(()->executeRequest(request, httpRequestDto)).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return responseDto;
     }
 
     private static HttpResponseDto executeRequest(HttpUriRequest request, HttpRequestDto httpRequestDto) {
