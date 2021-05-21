@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.other.pool;
+package com.nacol.TheRoadToGeek.week_03.other.woker;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;

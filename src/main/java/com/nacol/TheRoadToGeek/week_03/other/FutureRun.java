@@ -1,6 +1,6 @@
 package com.nacol.TheRoadToGeek.week_03.other;
 
-import com.nacol.TheRoadToGeek.week_03.other.future.Woker;
+import com.nacol.TheRoadToGeek.week_03.other.callable.Woker;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
