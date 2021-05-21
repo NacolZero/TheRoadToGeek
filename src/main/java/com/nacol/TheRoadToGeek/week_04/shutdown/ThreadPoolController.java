@@ -1,5 +1,7 @@
 package com.nacol.TheRoadToGeek.week_04.shutdown;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +28,21 @@ public class ThreadPoolController {
 
     @GetMapping("testThreadPool")
     public String testThreadPool() throws ExecutionException, InterruptedException {
-//        //自定义线程池
-//        for (int i = 0; i < 100; i++) {
-//            //TODO callable 使用优先级的方式执行会报错，还未找到原因
-////            Future<String> f = customPool.submit(new Baby(i));
-////            System.out.println(f.get());
-//            //STEP runnable 可以用优先级执行
-//            customPool.execute(new Gaga(i));
-//        }
+        //自定义线程池
+        /**
+         * 经过测试给了 10000000 个任务后，
+         * TaskCount 很快会到 10000000 → 也就是说接收的任务很快到 10000000 （历史总任务数量）
+         * queue size 会跟随任务的完成速度和剩余量动态调整，虽然设置了 20000 的储量，但是随着任务的数量增多 size 会大得变态
+         * ActiveCount 保持在 8~9
+         * CompletedTaskCount ：历史完成数量
+         */
+        for (int i = 0; i < 10000000; i++) {
+            //TODO callable 使用优先级的方式执行会报错，还未找到原因
+//            Future<String> f = customPool.submit(new Baby(i));
+//            System.out.println(f.get());
+            //STEP runnable 可以用优先级执行
+            customPool.execute(new Gaga(i));
+        }
 //
 //        //固定大小线程池
 //        for (int i = 0; i < 24; i++) {
@@ -47,14 +56,55 @@ public class ThreadPoolController {
 //            System.out.println(f.get());
 //        }
 //
-        //周期调度线程池
-        for (int i = 0; i < 24; i++) {
-            Future<String> f = schedulePool.schedule(new Baby(i), 1, TimeUnit.SECONDS);
-            System.out.println(f.get());
-        }
+//        //周期调度线程池
+//        for (int i = 0; i < 10; i++) {
+//            Future<String> f = schedulePool.schedule(new Baby(i), 5, TimeUnit.SECONDS);
+//            System.out.println(f.get());
+//        }
 
-        return "成功";
+        return "ok";
     }
+
+    @GetMapping("/runtimeStatus")
+    public JSONObject runtimeStatus() throws InterruptedException {
+
+        JSONObject json = new JSONObject();
+        json.put("queue size", customPool.getQueue().size());
+        json.put("ActiveCount", customPool.getActiveCount());
+        json.put("TaskCount", customPool.getTaskCount());
+        json.put("CompletedTaskCount", customPool.getCompletedTaskCount());
+        return json;
+    }
+
+
+    @GetMapping("/niceShutdown")
+    public String niceShutdown() throws InterruptedException {
+        schedulePool.shutdown();
+        boolean status = schedulePool.awaitTermination(2, TimeUnit.SECONDS);
+        if (status) {
+            schedulePool.shutdownNow();
+        }
+        return "ok";
+    }
+
+    @GetMapping("/shutdown")
+    public String shutdown() {
+        schedulePool.shutdown();
+        return "ok";
+    }
+
+    @GetMapping("/shutdownNow")
+    public String shutdownNow() {
+        schedulePool.shutdownNow();
+        return "ok";
+    }
+
+    @GetMapping("/isShutDowun")
+    public String isShutDowun() {
+        System.out.println("isShutdown : " + schedulePool.isShutdown());
+        return "ok";
+    }
+
 
 }
 
