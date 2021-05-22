@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_04.op;
+package com.nacol.TheRoadToGeek.week_04.wait_notify;
 
 public class ProAnCus {
 
