@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.other.thread;
+package com.nacol.TheRoadToGeek.week_03.task_5_multithreading.thread;
 
 public class NacolRunnable implements Runnable {
 

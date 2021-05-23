@@ -1,10 +1,10 @@
-package com.nacol.TheRoadToGeek.week_03.other.pool;
+package com.nacol.TheRoadToGeek.week_03.task_5_multithreading.pool;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.week_03.other.callable.MixTaskHandlerPlus;
-import com.nacol.TheRoadToGeek.week_03.other.callable.TaskHandlerPlus;
-import com.nacol.TheRoadToGeek.week_03.other.woker.TaskHandler;
+import com.nacol.TheRoadToGeek.week_03.task_5_multithreading.callable.MixTaskHandlerPlus;
+import com.nacol.TheRoadToGeek.week_03.task_5_multithreading.callable.TaskHandlerPlus;
+import com.nacol.TheRoadToGeek.week_03.task_5_multithreading.woker.TaskHandler;
 
 import java.util.ArrayList;
 import java.util.List;

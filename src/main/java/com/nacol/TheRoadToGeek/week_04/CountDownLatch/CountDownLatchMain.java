@@ -27,7 +27,6 @@ public class CountDownLatchMain {
         remainingDragonBalls.await();
         System.out.println("士兵们找齐了七龙珠");
         System.out.println("将军许愿变成了女人");
-
     }
 
     private static void dragonBall() throws InterruptedException {

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.other.callable;
+package com.nacol.TheRoadToGeek.week_03.task_5_multithreading.callable;
 
 import java.util.concurrent.Callable;
 

@@ -1,8 +1,8 @@
-package com.nacol.TheRoadToGeek.week_03.other.callable;
+package com.nacol.TheRoadToGeek.week_03.task_5_multithreading.callable;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.week_03.other.woker.TaskHandler;
+import com.nacol.TheRoadToGeek.week_03.task_5_multithreading.woker.TaskHandler;
 
 import java.util.List;
 import java.util.concurrent.Callable;

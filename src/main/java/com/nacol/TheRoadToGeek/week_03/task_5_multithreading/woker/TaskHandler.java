@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_03.other.woker;
+package com.nacol.TheRoadToGeek.week_03.task_5_multithreading.woker;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;

@@ -1,24 +1,18 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.outbound_handler;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper;
 import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper2;
-import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClientHelper;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.Router.HttpRouter;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.GatewayConfig;
-import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.NamedThreadFactory;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RouterConfig;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.outbound.OutFilterSet;
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.outbound.OutboudFilterConfig;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
-import io.netty.handler.codec.http.FullHttpRequest;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
-import org.apache.http.impl.nio.reactor.IOReactorConfig;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 public class Exchanger extends ChannelOutboundHandlerAdapter {
