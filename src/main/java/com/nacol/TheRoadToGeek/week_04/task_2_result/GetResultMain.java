@@ -12,26 +12,37 @@ public class GetResultMain {
          * 有些方法本质上一直，写法上不同，不一一列举了
          */
 
-        //线程池 + Callable
-        function01();
 
-        //线程池 + runnable + 实体类接收参数 + CountDownLatch 控制
-        function02();
 
-        //线程池(匿名内部类) + 强转类型
-        function03();
+//        CompletableFuture<Void> end = audience.thenAccept(it -> {
+//            System.out.println("切菜:" + it);
+//        });
+//
+//        end.join();
 
-        //FutureTask + Thread
-        function04();
-
-        //万物皆可 “睡眠疗法”
-        function05();
-
-        //主流程等子流程 join 过来
-        function06();
-
-        //CyclicBarrier → 回调 → 主线程等待回调线程 join 进来
-        function07();
+//        //线程池 + Callable
+//        function01();
+//
+//        //线程池 + runnable + 实体类接收参数 + CountDownLatch 控制
+//        function02();
+//
+//        //线程池(匿名内部类) + 强转类型
+//        function03();
+//
+//        //FutureTask + Thread
+//        function04();
+//
+//        //万物皆可 “睡眠疗法”
+//        function05();
+//
+//        //主流程等子流程 join 过来
+//        function06();
+//
+//        //CyclicBarrier → 回调 → 主线程等待回调线程 join 进来
+//        function07();
+//
+//        // CompletableFuture
+//        function08();
     }
 
     public static void function01() throws ExecutionException, InterruptedException {
@@ -87,6 +98,14 @@ public class GetResultMain {
         new WorkerResult(result, cyclicBarrier).run();
         callBackMain.join();
         System.out.println(result.getMsg());
+    }
+
+    private static void function08() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> person = CompletableFuture.supplyAsync(() -> {
+            System.out.println("打工打工，做功做功");
+            return "获取30K工资";
+        });
+        System.out.println(person.get());
     }
 
 }
