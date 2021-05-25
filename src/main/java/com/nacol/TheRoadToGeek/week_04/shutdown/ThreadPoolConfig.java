@@ -12,6 +12,27 @@ import java.util.concurrent.*;
 @Configuration
 public class ThreadPoolConfig {
 
+    /**
+     * @Description 线程池状态源码
+     */
+    private static final int COUNT_BITS = Integer.SIZE - 3;
+    private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
+
+    // runState is stored in the high-order bits
+    private static final int RUNNING    = -1 << COUNT_BITS;
+    private static final int SHUTDOWN   =  0 << COUNT_BITS;
+    private static final int STOP       =  1 << COUNT_BITS;
+    private static final int TIDYING    =  2 << COUNT_BITS;
+    private static final int TERMINATED =  3 << COUNT_BITS;
+
+    public static void main(String[] args) {
+        System.out.println(RUNNING);
+        System.out.println(SHUTDOWN);
+        System.out.println(STOP);
+        System.out.println(TIDYING);
+        System.out.println(TERMINATED);
+    }
+
     public static final int CORE_NUM = Runtime.getRuntime().availableProcessors() + 1;
 
     @Bean("taskPool")
@@ -46,7 +67,7 @@ public class ThreadPoolConfig {
         ThreadFactory threadFactory = new NamedThreadFactory("nacol-gaga-thread-facotry", false);
 
         //STEP 拒绝策略
-        //1. ThreadPoolExecutor.AbortPolicy: 默认策略，丢弃任务并抛出 RejectedExecutionExceptio 异常。可捕获可用额外的方式来处理，并非实质地把任务丢了。
+        //1. ThreadPoolExecutor.AbortPolicy: 默认策略，丢弃任务并抛出 RejectedExecutionException 异常。可捕获可用额外的方式来处理，并非实质地把任务丢了。
         //2. ThreadPoolExecutor.DiscardPolicy：丢弃任务，但是不抛出异常；
         //3. ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新提交被拒绝的任务 ；
         //4. ThreadPoolExecutor.CallerRunsPolicy：调用线程（提交任务的线程）处理该任务；（咱们小弟太忙了，老大你来帮忙吧）可做到不丢任务，并且缓冲线线程的压力。

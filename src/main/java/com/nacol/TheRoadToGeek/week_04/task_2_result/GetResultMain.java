@@ -9,16 +9,9 @@ public class GetResultMain {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         /**
-         * 有些方法本质上一直，写法上不同，不一一列举了
+         * 有些方法本质上一致，写法上不同，不一一列举了
          */
 
-
-
-//        CompletableFuture<Void> end = audience.thenAccept(it -> {
-//            System.out.println("切菜:" + it);
-//        });
-//
-//        end.join();
 
 //        //线程池 + Callable
 //        function01();

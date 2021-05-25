@@ -45,7 +45,6 @@ class Fater {
 
     public void eat() throws InterruptedException {
         try {
-
             lock.lock();
             System.out.println("等着吃饭");
             condition.await();
