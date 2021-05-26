@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.*;
+import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.LOGIN;
 
 /**
  * @Author Nacol

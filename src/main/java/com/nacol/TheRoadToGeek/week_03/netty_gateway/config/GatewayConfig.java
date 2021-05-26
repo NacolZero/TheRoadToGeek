@@ -14,11 +14,11 @@ public class GatewayConfig {
     public static final Map<String, List<String>> config = new HashMap<>();
     static {
         //货物服务
-        config.put("cargo", Arrays.asList("localhost:9001", "localhost:9002"));
+        config.put("cargo", Arrays.asList("127.0.0.1:9001", "127.0.0.1:9002"));
         //运单服务
-        config.put("waybill", Arrays.asList("localhost:9003", "localhost:9004"));
+        config.put("waybill", Arrays.asList("127.0.0.1:9003", "127.0.0.1:9004"));
         //航班服务
-        config.put("flight", Arrays.asList("localhost:9005", "localhost:9006"));
+        config.put("flight", Arrays.asList("127.0.0.1:9005", "127.0.0.1:9006"));
     }
 
 }

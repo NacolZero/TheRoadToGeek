@@ -2,7 +2,7 @@ package com.nacol.TheRoadToGeek.week_03.netty_gateway;
 
 import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.GatewayConfig;
 
-public class Run {
+public class NettyGatewayRun {
 
     public static void main(String[] args) {
         run(9989, GatewayConfig.CARGO);

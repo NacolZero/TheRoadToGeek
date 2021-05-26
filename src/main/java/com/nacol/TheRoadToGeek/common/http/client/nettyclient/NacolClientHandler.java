@@ -23,7 +23,7 @@ public class NacolClientHandler extends SimpleChannelInboundHandler<HttpResponse
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.info("-------------------exceptionCaught");
+        log.info("-------------------exceptionCaught" + cause);
         ctx.close();
     }
 

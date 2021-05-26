@@ -25,7 +25,7 @@ public class Exchanger extends ChannelOutboundHandlerAdapter {
     private OutFilterSet outFilterSet;
 
     public Exchanger(String serverCode) {
-        System.out.println("-------------------------------HttpOutboundHandler : " + System.currentTimeMillis());
+        System.out.println("-------------------------------init Exchanger : " + System.currentTimeMillis());
         this.serverCode = serverCode;
         //STEP 初始化 router
         router = RouterConfig.initRouter(serverCode);
@@ -44,13 +44,13 @@ public class Exchanger extends ChannelOutboundHandlerAdapter {
         return backend.endsWith("/")?backend.substring(0,backend.length()-1):backend;
     }
 
-    public void route(HttpRequestDto fullHttpRequest, ChannelHandlerContext ctx) {
+    public void route(HttpRequestDto httpRequestDto, ChannelHandlerContext ctx) {
         //负债均衡
         String backendUrl = router.route(this.hosts);
-        final String url = backendUrl + "/" +fullHttpRequest.getUri();
+        final String url = "http://" + backendUrl + "/" +httpRequestDto.getUri();
         //这里转发给其他服务即可
-        fullHttpRequest.setUrl(url);
-        HttpClientHelper2.sendRequest(fullHttpRequest);
+        httpRequestDto.setUrl(url);
+        HttpClientHelper2.sendRequest(httpRequestDto);
     }
 
 

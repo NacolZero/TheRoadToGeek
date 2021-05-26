@@ -20,6 +20,8 @@ public class HttpResponseDto extends BaseSendDto implements Serializable {
 
     private Object resultData;
 
+    private String serviceCode;
+
     private Map<String, String> customHeaders = new HashMap<>();
 
     public Object getResultData() {
@@ -47,4 +49,14 @@ public class HttpResponseDto extends BaseSendDto implements Serializable {
     public void setCustomHeaders(Map<String, String> customHeaders) {
         this.customHeaders = customHeaders;
     }
+
+    public HttpResponseDto setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
+        return this;
+    }
+
+    public String getServiceCode() {
+        return this.serviceCode;
+    }
+
 }

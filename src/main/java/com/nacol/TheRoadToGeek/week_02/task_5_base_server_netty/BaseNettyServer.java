@@ -20,7 +20,11 @@ import io.netty.handler.logging.LoggingHandler;
 public class BaseNettyServer {
 
     public static void main(String[] args) throws InterruptedException {
-        int port = 9989;
+
+        start(9002);
+    }
+
+    public synchronized static void start(int port){
         EventLoopGroup bosssGroup = new NioEventLoopGroup(2);
         EventLoopGroup workerGroup = new NioEventLoopGroup(16);
 
@@ -56,6 +60,8 @@ public class BaseNettyServer {
             Channel channel = bootstrap.bind(port).sync().channel();
             System.out.println("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1:" + port + '/');
             channel.closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } finally {
             bosssGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

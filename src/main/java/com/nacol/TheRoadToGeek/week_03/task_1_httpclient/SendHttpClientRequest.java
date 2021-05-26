@@ -19,15 +19,15 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpSourceCacheEnum.*;
 public class SendHttpClientRequest {
 
     public static void main(String[] args) throws IOException {
-        //get: params
-        HttpRequestDto getRequest = initBaseData().setServiceCode(TEST.serviceCode);
-        HttpResponseDto responseDto1 = ClientHelper.sendRequest(getRequest);
-        System.out.println(responseDto1.getResultData());
-
-        //post: form
-        HttpRequestDto formRequest = initBaseData().setServiceCode(PAY.serviceCode);
-        HttpResponseDto responseDto2 = ClientHelper.sendRequest(formRequest);
-        System.out.println(responseDto2.getResultData());
+//        //get: params
+//        HttpRequestDto getRequest = initBaseData().setServiceCode(TEST.serviceCode);
+//        HttpResponseDto responseDto1 = ClientHelper.sendRequest(getRequest);
+//        System.out.println(responseDto1.getResultData());
+//
+//        //post: form
+//        HttpRequestDto formRequest = initBaseData().setServiceCode(PAY.serviceCode);
+//        HttpResponseDto responseDto2 = ClientHelper.sendRequest(formRequest);
+//        System.out.println(responseDto2.getResultData());
 
         //post: body(json)
         HttpRequestDto bodyRequest = initBaseData().setServiceCode(LOGIN.serviceCode);

@@ -3,12 +3,15 @@ package com.nacol.TheRoadToGeek.common.http.client.httpclient;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
+import com.nacol.TheRoadToGeek.common.annotation.HttpFilter;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpConstants;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategyFactory;
 import com.nacol.TheRoadToGeek.week_03.task_6_gateway_pool.GateWayThreadPool;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -34,6 +37,7 @@ import static com.nacol.TheRoadToGeek.common.entity.http.HttpConstants.*;
  * @Description Http 小助手
  * ps: 该类只应该组织流程，当复杂度提升后可把具体执行的流程完全解耦出去.
  */
+@Log4j2
 public class HttpClientHelper2 {
 
     /**
@@ -48,8 +52,8 @@ public class HttpClientHelper2 {
         //STEP 初始化参数
         initParams(request, httpRequestDto);
         //STEP 执行请求
-        HttpResponseDto result = submitRequest(request, httpRequestDto);//多线程
-//        HttpResponseDto result = executeRequest(request, httpRequestDto);//傻呆呆单线程
+//        HttpResponseDto result = submitRequest(request, httpRequestDto);//多线程
+        HttpResponseDto result = executeRequest(request, httpRequestDto);//傻呆呆单线程
         //STEP 日志(不该写这里)
         recordLog(httpRequestDto);
         return result;
@@ -111,7 +115,7 @@ public class HttpClientHelper2 {
 
     private static void recordLog(HttpRequestDto httpRequestDto) {
         if (httpRequestDto.isLogRecord()) {
-            System.out.println(LocalDateTime.now() + ":" + httpRequestDto.getUrl());
+            System.out.println(" - - - - - - recordLog : " +  LocalDateTime.now() + ":" + httpRequestDto.getUrl());
         }
     }
 }

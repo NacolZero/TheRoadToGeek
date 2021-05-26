@@ -32,9 +32,9 @@ public class RunNettyHttpClient {
 //                //输出发送日志
 //                .log()
                 ;
-        for (int i = 0; i < 10 ;i++){
+//        for (int i = 0; i < 10 ;i++){
             HttpResponseDto responseDto = ClientHelper.sendRequest(httpRequestDto);
-        }
+//        }
 
     }
 }

@@ -36,6 +36,7 @@ public class NacolServerHandler extends ChannelInboundHandlerAdapter{
             response.setResultData("server 端未获取到有效 uri")
                 .setStatus(500);
         }
+        log.info("response : {}", response);
         ctx.writeAndFlush(response);
     }
 
