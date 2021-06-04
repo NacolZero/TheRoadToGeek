@@ -1,6 +1,6 @@
 package com.nacol.TheRoadToGeek.common.http.param_strategy.impl;
 
-import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
+import com.nacol.TheRoadToGeek.common.exception.ServiceException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
 import org.apache.http.NameValuePair;

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_02.task_5_base_server_netty;
+package com.nacol.TheRoadToGeek.common.http.gateway.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -10,21 +10,19 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * @Author Nacol
  * @Email Nacol@sina.com
- * @Date 2021/5/11
- * @Description Netty 服务端启动类
+ * @Date 2021/6/4
+ * @Description server 端（apple 版本）
  */
-public class BaseNettyServer {
+@Log4j2
+public class AppleNettyServer implements BaseNettyServer {
 
-    public static void main(String[] args) throws InterruptedException {
-
-        start(9002);
-    }
-
-    public synchronized static void start(int port){
+    @Override
+    public void start(int port) {
         EventLoopGroup bosssGroup = new NioEventLoopGroup(2);
         EventLoopGroup workerGroup = new NioEventLoopGroup(16);
 
@@ -53,12 +51,10 @@ public class BaseNettyServer {
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
 //                    //指定我们另外一个类 ：流水线定义
-//                    .childHandler(new HttpServerInitializer());
-                    //
-                    .childHandler(new NacolServerInitalizer());
+                    .childHandler(new AppleHttpServerInitializer());
 
             Channel channel = bootstrap.bind(port).sync().channel();
-            System.out.println("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1:" + port + '/');
+            log.info("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1: ｛｝ /", port);
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -67,5 +63,4 @@ public class BaseNettyServer {
             workerGroup.shutdownGracefully();
         }
     }
-
 }

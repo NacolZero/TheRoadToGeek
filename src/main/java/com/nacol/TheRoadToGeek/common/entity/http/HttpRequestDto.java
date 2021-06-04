@@ -1,6 +1,6 @@
 package com.nacol.TheRoadToGeek.common.entity.http;
 
-import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
+import com.nacol.TheRoadToGeek.common.exception.ServiceException;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
@@ -9,6 +9,9 @@ import org.springframework.util.Assert;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.nacol.TheRoadToGeek.common.http.client_v2.config.HttpClientConfig.HTTP_CLIENT;
+import static com.nacol.TheRoadToGeek.common.http.client_v2.config.HttpClientConfig.NETTY;
 
 /**
  * @Author Nacol
@@ -20,9 +23,6 @@ import java.util.Map;
 @Data
 @Accessors(chain = true)
 public class HttpRequestDto extends BaseSendDto implements Serializable {
-
-    public static final String HTTP_CLIENT = "httpclient";
-    public static final String NETTY = "netty";
 
     /**
      * 发送技术：httpclient、netty
@@ -167,12 +167,12 @@ public class HttpRequestDto extends BaseSendDto implements Serializable {
     }
 
     public HttpRequestDto sendByHttpClient(){
-        this.technology = HTTP_CLIENT;
+        this.technology = HTTP_CLIENT.tecName;
         return this;
     }
 
     public HttpRequestDto sendByNetty(){
-        this.technology = NETTY;
+        this.technology = NETTY.tecName;
         return this;
     }
 

@@ -2,7 +2,6 @@ package com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.FullHttpRequest;
 
 import java.util.List;
 

@@ -2,19 +2,13 @@ package com.nacol.TheRoadToGeek.common.http.client.httpclient;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.nacol.TheRoadToGeek.common.Exception.ServiceException;
-import com.nacol.TheRoadToGeek.common.annotation.HttpFilter;
-import com.nacol.TheRoadToGeek.common.entity.http.HttpConstants;
+import com.nacol.TheRoadToGeek.common.exception.ServiceException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategy;
-import com.nacol.TheRoadToGeek.common.http.param_strategy.ParamStrategyFactory;
 import com.nacol.TheRoadToGeek.week_03.task_6_gateway_pool.GateWayThreadPool;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
@@ -26,7 +20,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import static com.nacol.TheRoadToGeek.common.entity.http.HttpConstants.*;
 

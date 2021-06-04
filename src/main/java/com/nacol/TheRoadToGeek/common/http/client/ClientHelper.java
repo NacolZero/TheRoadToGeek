@@ -1,15 +1,13 @@
 package com.nacol.TheRoadToGeek.common.http.client;
 
-import com.nacol.TheRoadToGeek.common.Exception.StrategyNotFoundException;
-import com.nacol.TheRoadToGeek.common.annotation.HttpFilter;
+import com.nacol.TheRoadToGeek.common.exception.StrategyNotFoundException;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
 import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import com.nacol.TheRoadToGeek.common.http.client.httpclient.HttpClientHelper2;
 import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NacolNettyClientHelper;
-import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NettyClientHelper;
 
-import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.HTTP_CLIENT;
-import static com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto.NETTY;
+import static com.nacol.TheRoadToGeek.common.http.client_v2.config.HttpClientConfig.HTTP_CLIENT;
+import static com.nacol.TheRoadToGeek.common.http.client_v2.config.HttpClientConfig.NETTY;
 
 /**
  * @Author Nacol
@@ -23,12 +21,12 @@ public class ClientHelper {
     public static HttpResponseDto sendRequest(HttpRequestDto requestDto) {
         HttpResponseDto responseDto;
         // use httpclient
-        if (HTTP_CLIENT.equals(requestDto.getTechnology())) {
+        if (HTTP_CLIENT.tecName.equals(requestDto.getTechnology())) {
 //            responseDto = HttpClientHelper.sendRequest(requestDto);
             responseDto = HttpClientHelper2.sendRequest(requestDto);
         }
         // use netty
-        else if (NETTY.equals(requestDto.getTechnology())) {
+        else if (NETTY.tecName.equals(requestDto.getTechnology())) {
 //            responseDto = NettyClientHelper.sendRequest(requestDto);
             responseDto = NacolNettyClientHelper.sendRequest(requestDto);
         } else {

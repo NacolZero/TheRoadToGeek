@@ -1,24 +1,22 @@
-package com.nacol.TheRoadToGeek.common.http.client.nettyclient;
+package com.nacol.TheRoadToGeek.common.http.client_v2.netty;
 
-import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
-import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
-import com.nacol.TheRoadToGeek.common.http.client_v2.netty.BaseNettyClient;
-import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcDecoder;
-import com.nacol.TheRoadToGeek.week_03.netty_gateway.config.RpcEncoder;
+import com.nacol.TheRoadToGeek.common.http.client.nettyclient.NacolClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpServerCodec;
 
-public class NacolNettyClient implements BaseNettyClient {
+public class AppleNettyClient implements BaseNettyClient{
 
     private final String host;
     private final int port;
     private Channel channel;
 
     //连接服务端的端口号地址和端口号
-    public NacolNettyClient(String host, int port) {
+    public AppleNettyClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
@@ -34,10 +32,12 @@ public class NacolNettyClient implements BaseNettyClient {
                     public void initChannel(SocketChannel ch) throws Exception {
                         System.out.println("正在连接中...");
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new RpcEncoder(HttpRequestDto.class)); //编码request
-                        pipeline.addLast(new RpcDecoder(HttpResponseDto.class)); //解码response
-                        pipeline.addLast(new NacolClientHandler()); //客户端处理类
-
+                        //httpServer 编码器
+                        pipeline.addLast(new HttpServerCodec());
+                        //报文聚合器
+                        pipeline.addLast(new HttpObjectAggregator(1024 * 1024));
+                        //客户端处理类
+                        pipeline.addLast(new NacolClientHandler());
                     }
                 });
         //发起异步连接请求，绑定连接端口和host信息

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.common.Exception;
+package com.nacol.TheRoadToGeek.common.exception;
 
 /**
  * @Author Nacol

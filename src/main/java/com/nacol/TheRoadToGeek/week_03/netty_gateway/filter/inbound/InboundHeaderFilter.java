@@ -1,8 +1,8 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound;
 
 import com.nacol.TheRoadToGeek.common.entity.http.HttpRequestDto;
+import com.nacol.TheRoadToGeek.common.entity.http.HttpResponseDto;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.FullHttpRequest;
 
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ public class InboundHeaderFilter implements HttpInboundFilter {
 
     @Override
     public void filter(HttpRequestDto requestDto, ChannelHandlerContext ctx) {
-        requestDto.getCustomHeaders().put("requestid", serverCode + UUID.randomUUID());
+        requestDto.getCustomHeaders().put(serverCode + "responeseid", UUID.randomUUID().toString());
     }
 
 }
