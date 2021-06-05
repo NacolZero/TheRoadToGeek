@@ -54,7 +54,7 @@ public class AppleNettyServer implements BaseNettyServer {
                     .childHandler(new AppleHttpServerInitializer());
 
             Channel channel = bootstrap.bind(port).sync().channel();
-            log.info("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1: ｛｝ /", port);
+            log.info("开启 Netty Http 服务器，监听地址和端口为 : http://127.0.0.1:{}/", port);
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.nacol.TheRoadToGeek.week_03.netty_gateway.filter.inbound;
 
+
 import com.nacol.TheRoadToGeek.common.http.gateway.netty.filter.in.impl.InboundHeaderFilterI;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class InboudFilterConfig {
         switch (serverCode) {
             //TODO 可扩展：ServerCode 给每次请求配置不同的入站 FilterSet
             default:
-                inFilterSet = new InFilterSet(Arrays.asList(new InboundHeaderFilterI(serverCode)));
+                inFilterSet = new InFilterSet(Arrays.asList(new InboundHeaderFilter(serverCode)));
         }
         return inFilterSet;
     }

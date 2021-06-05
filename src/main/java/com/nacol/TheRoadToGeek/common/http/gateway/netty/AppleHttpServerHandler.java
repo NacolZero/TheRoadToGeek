@@ -1,5 +1,6 @@
 package com.nacol.TheRoadToGeek.common.http.gateway.netty;
 
+import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -30,6 +31,7 @@ public class AppleHttpServerHandler extends ChannelInboundHandlerAdapter {
             String uri = fullHttpRequest.uri();
             //此处 相当于是路由 或者  controller mapping
             String request = fullHttpRequest.content().toString(CharsetUtil.UTF_8);
+            log.info(JSONObject.toJSONString(request));
 
         } catch (Exception e) {
             e.printStackTrace();
