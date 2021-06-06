@@ -1,5 +1,6 @@
 package com.nacol.TheRoadToGeek.common.entity.http;
 
+import lombok.ToString;
 import org.springframework.util.Assert;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.util.Assert;
  * 2. 为了防止从缓存取出后不被修改，使用 Builder 模式。(可直接从 Redis 以对象的形式取出来)
  * ps：当前使用了枚举使用不到该类，待使用 Redis 后可使用该类代替枚举，并重写 HttpResponseDto.initUr()。
  */
+@ToString
 public class HttpSource {
 
     private String serviceCode;
@@ -97,6 +99,6 @@ public class HttpSource {
     }
 
     public String getUri() {
-        return this.getUri();
+        return this.uri;
     }
 }
