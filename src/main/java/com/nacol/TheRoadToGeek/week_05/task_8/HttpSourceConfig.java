@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_05.task_5;
+package com.nacol.TheRoadToGeek.week_05.task_8;
 
 import lombok.Getter;
 import lombok.Setter;

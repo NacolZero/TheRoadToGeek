@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.nacol.TheRoadToGeek.week_05.task_5.HttpSouceAutoConfiguration
+com.nacol.TheRoadToGeek.week_05.task_8.HttpSouceAutoConfiguration
