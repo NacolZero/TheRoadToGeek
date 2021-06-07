@@ -82,7 +82,8 @@ public class StreamDemo {
                 .collect(Collectors.toMap(o->o, o->o+1, (o1, o2)->o1));
         intMap.forEach((k, v)-> System.out.println(k + ":" + v));
         //----------------------终止操作 | 迭代----------------------------
-
+        IntSummaryStatistics statistics = numbers.stream().mapToInt(num -> num).summaryStatistics();
+        //statistics: 各种统计操作
 
         //----------------------其他----------------------------
         System.out.println("-------1出现的次数-------");
