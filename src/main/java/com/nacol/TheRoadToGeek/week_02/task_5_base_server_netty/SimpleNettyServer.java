@@ -54,7 +54,6 @@ public class SimpleNettyServer {
                     .handler(new LoggingHandler(LogLevel.INFO))
 //                    //指定我们另外一个类 ：流水线定义
 //                    .childHandler(new HttpServerInitializer());
-                    //
                     .childHandler(new NacolServerInitalizer());
 
             Channel channel = bootstrap.bind(port).sync().channel();
