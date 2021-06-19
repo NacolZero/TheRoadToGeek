@@ -21,6 +21,6 @@ public class BatchHandleController {
     @PostMapping("handle")
     public BatchDTO handle() throws SQLException {
         return batchHandleService.batchHandle();
-    }
+}
 
 }

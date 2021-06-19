@@ -16,6 +16,7 @@ public class BatchDTO {
 
     private String dataSourece;
 
+    private String message;
 
     public void useHikri() {
         this.dataSourece = DATA_SOURCE_HIKRI;
