@@ -10,6 +10,8 @@ public class DatabaseConfig {
 
     private String driverClassName;
 
+    private int maximumPoolSize;
+
     public String getJdbcUrl() {
         return jdbcUrl;
     }
@@ -42,4 +44,11 @@ public class DatabaseConfig {
         this.driverClassName = driverClassName;
     }
 
+    public int getMaximumPoolSize() {
+        return maximumPoolSize;
+    }
+
+    public void setMaximumPoolSize(int maximumPoolSize) {
+        this.maximumPoolSize = maximumPoolSize;
+    }
 }

@@ -32,6 +32,7 @@ public class DruidDataSourceConfig {
         dataSource.setPassword(databaseConfig.getPassword());
         dataSource.setUrl(databaseConfig.getJdbcUrl());
         dataSource.setDriverClassName(databaseConfig.getDriverClassName());
+        dataSource.setMaxActive(databaseConfig.getMaximumPoolSize());
         return dataSource;
     }
 }

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +19,8 @@ public class BatchDTO {
     private String dataSourece;
 
     private String message;
+
+    private List<String> messageList;
 
     public void useHikri() {
         this.dataSourece = DATA_SOURCE_HIKRI;
