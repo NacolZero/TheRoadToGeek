@@ -3,6 +3,7 @@ package com.nacol.TheRoadToGeek.week_06.database.service.impl;
 import com.nacol.TheRoadToGeek.common.utils.DateUtils;
 import com.nacol.TheRoadToGeek.common.utils.IdUtils;
 import com.nacol.TheRoadToGeek.common.utils.SerialNoUtils;
+import com.nacol.TheRoadToGeek.common.utils.SnowflakeIdWorker;
 import com.nacol.TheRoadToGeek.week_06.database.entity.BatchDTO;
 import com.nacol.TheRoadToGeek.week_06.database.service.BatchHandleService;
 import lombok.extern.log4j.Log4j2;
@@ -41,6 +42,8 @@ public class BatchHandleServiceImpl implements BatchHandleService {
     @Resource(name = "jdbc-fixedThreadPools")
     ExecutorService executorService;
 
+    @Resource(name = "snowflakeFactory")
+    SnowflakeIdWorker snowflakeFactory;
     private static final String SQL_INSERT_3 = "insert into order_base_2 (serial_no)  values (?)";
 
     private static final String SQL_INSERT_2 = "insert into order_base_2 (serial_no, create_time, update_time, user_id, " +
