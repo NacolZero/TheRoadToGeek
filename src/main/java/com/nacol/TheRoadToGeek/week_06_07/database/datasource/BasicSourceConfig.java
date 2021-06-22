@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.database.datasource;
+package com.nacol.TheRoadToGeek.week_06_07.database.datasource;
 
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.springframework.context.annotation.Bean;

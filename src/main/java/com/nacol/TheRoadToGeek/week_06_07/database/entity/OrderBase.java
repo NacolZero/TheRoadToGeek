@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.database.entity;
+package com.nacol.TheRoadToGeek.week_06_07.database.entity;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.stream;
+package com.nacol.TheRoadToGeek.week_06_07.stream;
 
 import java.util.*;
 import java.util.stream.Collectors;

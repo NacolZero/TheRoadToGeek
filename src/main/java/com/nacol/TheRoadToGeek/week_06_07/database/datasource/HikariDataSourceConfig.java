@@ -1,6 +1,5 @@
-package com.nacol.TheRoadToGeek.week_06.database.datasource;
+package com.nacol.TheRoadToGeek.week_06_07.database.datasource;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

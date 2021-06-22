@@ -1,11 +1,11 @@
-package com.nacol.TheRoadToGeek.week_06.database.service.impl;
+package com.nacol.TheRoadToGeek.week_06_07.database.service.impl;
 
 import com.nacol.TheRoadToGeek.common.utils.DateUtils;
 import com.nacol.TheRoadToGeek.common.utils.IdUtils;
 import com.nacol.TheRoadToGeek.common.utils.SerialNoUtils;
 import com.nacol.TheRoadToGeek.common.utils.SnowflakeIdWorker;
-import com.nacol.TheRoadToGeek.week_06.database.entity.BatchDTO;
-import com.nacol.TheRoadToGeek.week_06.database.service.BatchHandleService;
+import com.nacol.TheRoadToGeek.week_06_07.database.entity.BatchDTO;
+import com.nacol.TheRoadToGeek.week_06_07.database.service.BatchHandleService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,7 @@ public class BatchHandleServiceImpl implements BatchHandleService {
             "user_address_id, seller_id, cmd_base_id, cmd_entity_id, pay_type) " +
             "values (?,?,?,?,?,?,?,?,?)";
 
-    private static final String SQL_INSERT = "insert into order_base (id, serial_no, create_time, update_time, user_id, " +
+    private static final String SQL_INSERT_BASE_ODER = "insert into order_base (id, serial_no, create_time, update_time, user_id, " +
             "user_address_id, seller_id, cmd_base_id, cmd_entity_id, pay_type) " +
             "values (?,?,?,?,?,?,?,?,?,?)";
 
@@ -61,7 +61,7 @@ public class BatchHandleServiceImpl implements BatchHandleService {
 
     private static final String SQL_DELETE = "delete from order_base where id=?";
 
-    private static final int MILLION = 10000000/20;
+    private static final int MILLION = 100000/20;
 
     @Override
     public String batchHandle(BatchDTO param) throws SQLException {
@@ -102,7 +102,7 @@ public class BatchHandleServiceImpl implements BatchHandleService {
     private String handle(DataSource dataSource) {
         String msg = "";
         try(Connection conn = dataSource.getConnection();
-            PreparedStatement insertStatement = conn.prepareStatement(SQL_INSERT);
+            PreparedStatement insertStatement = conn.prepareStatement(SQL_INSERT_BASE_ODER);
             PreparedStatement updateStatement = conn.prepareStatement(SQL_UPDATE);
             Statement selectStatement = conn.createStatement();
             PreparedStatement deleteStatement = conn.prepareStatement(SQL_DELETE)) {
@@ -205,23 +205,31 @@ public class BatchHandleServiceImpl implements BatchHandleService {
         System.out.println("数据库版本>>" + metaData.getDatabaseProductVersion());
     }
 
+    private static final String SQL_INSERT_PAMENT = "insert into order_payment (order_base_id, payment_type, user_bank_id, " +
+            "alipy_id, amount, seller_id, create_time, update_time) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?)";
+
     @Override
     public String batchInsert(BatchDTO param) throws ExecutionException, InterruptedException {
+        //STEP 创建商品基础类型
+        Set<String> orderBaseIds = new HashSet<>();
+        craeteOrderBase(orderBaseIds);
+        return null;
+    }
+
+    private void craeteOrderBase(Set<String> orderBaseIds) throws ExecutionException, InterruptedException {
         long startTimee = System.currentTimeMillis();
         List<Future> futures = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Future f = executorService.submit(() -> {
                 try (Connection conn = hikariForMySQLDataSource.getConnection();
-                     PreparedStatement insertStatement = conn.prepareStatement(SQL_INSERT)) {
+                     PreparedStatement insertStatement = conn.prepareStatement(SQL_INSERT_BASE_ODER)) {
                     conn.setAutoCommit(false);
-                    String dataSoureceInfo = getDataSource(hikariForMySQLDataSource);
                     //STEP INSERT
-//                    private static final String SQL_INSERT_2 = "insert into order_base_2 (serial_no, create_time, update_time, user_id, " +
-//                            "user_address_id, seller_id, cmd_base_id, cmd_entity_id, pay_type) " +
-//                            "values (?,?,?,?,?,?,?,?,?)";
-                    long insertStartTime = System.currentTimeMillis();
                     for (int j = 0; j < MILLION; j++) {
-                        insertStatement.setString(1, IdUtils.generateUUID());
+                        String orderBaseId = IdUtils.generateUUID();
+                        orderBaseIds.add(orderBaseId);
+                        insertStatement.setString(1, orderBaseId);
                         //serialNo
                         insertStatement.setString(2, SerialNoUtils.generateSimpleSerialNo());
                         //createTime
@@ -238,7 +246,6 @@ public class BatchHandleServiceImpl implements BatchHandleService {
                         insertStatement.setString(8, IdUtils.generateUUID());
                         //cmdEntityId
                         insertStatement.setString(9, IdUtils.generateUUID());
-
                         insertStatement.setInt(10, new Random().nextInt(2));
                         insertStatement.addBatch();
                         //可以设置不同的大小；如50，100，500，1000等等
@@ -248,8 +255,7 @@ public class BatchHandleServiceImpl implements BatchHandleService {
                             insertStatement.clearBatch();
                         }
                     }
-                    int[] counts = insertStatement.executeBatch();
-//                    System.out.println("执行SQL次数 : " + counts.length + 1);
+                    insertStatement.executeBatch();
                     System.out.println(Thread.currentThread().getName() + " 完成");
                     conn.commit();
                     insertStatement.clearBatch();
@@ -262,8 +268,11 @@ public class BatchHandleServiceImpl implements BatchHandleService {
         for (Future future : futures) {
             future.get();
         }
-        executorService.shutdown();
         System.out.println("use time : " + (System.currentTimeMillis() - startTimee));
-        return null;
+    }
+
+    static class DataPool {
+        List<String> sellerIds;
+
     }
 }

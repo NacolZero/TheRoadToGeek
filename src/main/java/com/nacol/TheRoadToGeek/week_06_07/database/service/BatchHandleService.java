@@ -1,6 +1,6 @@
-package com.nacol.TheRoadToGeek.week_06.database.service;
+package com.nacol.TheRoadToGeek.week_06_07.database.service;
 
-import com.nacol.TheRoadToGeek.week_06.database.entity.BatchDTO;
+import com.nacol.TheRoadToGeek.week_06_07.database.entity.BatchDTO;
 
 import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;

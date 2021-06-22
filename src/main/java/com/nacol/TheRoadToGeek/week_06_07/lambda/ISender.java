@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.lambda;
+package com.nacol.TheRoadToGeek.week_06_07.lambda;
 
 public interface ISender {
 

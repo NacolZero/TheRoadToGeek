@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.database.mapper;
+package com.nacol.TheRoadToGeek.week_06_07.database.mapper;
 
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.database.threadconfig;
+package com.nacol.TheRoadToGeek.week_06_07.database.threadconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

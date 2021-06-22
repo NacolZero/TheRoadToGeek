@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06.database.datasource;
+package com.nacol.TheRoadToGeek.week_06_07.database.datasource;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
