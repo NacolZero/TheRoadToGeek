@@ -35,4 +35,9 @@ public class BatchHandleController {
     public String batchInsert(@RequestBody BatchDTO param) throws SQLException, ExecutionException, InterruptedException {
         return batchHandleService.batchInsert(param);
     }
+
+    @PostMapping("batchInsertPayment")
+    public String batchInsertPayment(@RequestBody BatchDTO param) throws SQLException, ExecutionException, InterruptedException {
+        return batchHandleService.batchInsertPayment(param);
+    }
 }

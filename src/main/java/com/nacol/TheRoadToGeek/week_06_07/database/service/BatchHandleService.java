@@ -12,4 +12,6 @@ public interface BatchHandleService {
     String batchTest(BatchDTO param) throws SQLException;
 
     String batchInsert(BatchDTO param) throws ExecutionException, InterruptedException;
+
+    String batchInsertPayment(BatchDTO param) throws ExecutionException, InterruptedException;
 }

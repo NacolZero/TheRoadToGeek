@@ -61,8 +61,14 @@ public class BatchHandleServiceImpl implements BatchHandleService {
 
     private static final String SQL_DELETE = "delete from order_base where id=?";
 
-    private static final int MILLION = 100000/20;
+    private static final int MILLION = 30000000/20;
 
+    private static final int THOUSAND = 1000;
+
+    //2021-01-01 00:00:00
+    private long START_TIME = 1609430400000L;
+    //2022-01-01 00:00:00
+    private long END_TIME = 1640966400000L;
     @Override
     public String batchHandle(BatchDTO param) throws SQLException {
         String result = "";
@@ -205,10 +211,6 @@ public class BatchHandleServiceImpl implements BatchHandleService {
         System.out.println("数据库版本>>" + metaData.getDatabaseProductVersion());
     }
 
-    private static final String SQL_INSERT_PAMENT = "insert into order_payment (order_base_id, payment_type, user_bank_id, " +
-            "alipy_id, amount, seller_id, create_time, update_time) " +
-            "values (?, ?, ?, ?, ?, ?, ?, ?)";
-
     @Override
     public String batchInsert(BatchDTO param) throws ExecutionException, InterruptedException {
         //STEP 创建商品基础类型
@@ -270,9 +272,60 @@ public class BatchHandleServiceImpl implements BatchHandleService {
         }
         System.out.println("use time : " + (System.currentTimeMillis() - startTimee));
     }
+    private static final String SQL_INSERT_PAMENT = "insert into order_payment (id, cmd_entity_id, order_base_id, payment_type, user_bank_id, " +
+            "alipy_id, amount, seller_id, create_time, update_time) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    static class DataPool {
-        List<String> sellerIds;
+    @Override
+    public String batchInsertPayment(BatchDTO param) throws ExecutionException, InterruptedException {
+        long startTimee = System.currentTimeMillis();
+        List<Future> futures = new ArrayList<>();
+        List<String> cmdEntityId = new ArrayList<>();
+        List<String> sellerIds = new ArrayList<>();
 
+        for (int i = 0; i < THOUSAND; i++) {
+            cmdEntityId.add(IdUtils.generateUUID());
+            sellerIds.add(IdUtils.generateUUID());
+        }
+        for (int i = 0; i < 20; i++) {
+            Future f = executorService.submit(() -> {
+                try (Connection conn = hikariForMySQLDataSource.getConnection();
+                     PreparedStatement insertStatement = conn.prepareStatement(SQL_INSERT_PAMENT)) {
+                    conn.setAutoCommit(false);
+                    //STEP INSERT
+                    for (int j = 0; j < MILLION; j++) {
+                        insertStatement.setString(1, IdUtils.generateUUID());
+                        insertStatement.setString(2, cmdEntityId.get(new Random().nextInt(THOUSAND)));
+                        insertStatement.setString(3, IdUtils.generateUUID());
+                        insertStatement.setInt(4, new Random().nextInt(3));
+                        insertStatement.setString(5, IdUtils.generateUUID());
+                        insertStatement.setString(6, IdUtils.generateUUID());
+                        insertStatement.setInt(7, new Random().nextInt(10000));
+                        insertStatement.setString(8, sellerIds.get(new Random().nextInt(THOUSAND)));
+                        insertStatement.setLong(9, new Random().nextInt((int)(END_TIME -  START_TIME)+ 1) + START_TIME);
+                        insertStatement.setLong(10, DateUtils.getCurrentNano());
+                        insertStatement.addBatch();
+                        //可以设置不同的大小；如50，100，500，1000等等
+                        if (j % 10000 == 0) {
+                            insertStatement.executeBatch();
+                            conn.commit();
+                            insertStatement.clearBatch();
+                        }
+                    }
+                    insertStatement.executeBatch();
+                    System.out.println(Thread.currentThread().getName() + " 完成");
+                    conn.commit();
+                    insertStatement.clearBatch();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            futures.add(f);
+        }
+        for (Future future : futures) {
+            future.get();
+        }
+        System.out.println("use time : " + (System.currentTimeMillis() - startTimee));
+        return null;
     }
 }
