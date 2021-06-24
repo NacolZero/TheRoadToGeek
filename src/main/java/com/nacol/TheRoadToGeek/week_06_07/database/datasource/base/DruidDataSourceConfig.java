@@ -1,10 +1,12 @@
-package com.nacol.TheRoadToGeek.week_06_07.database.datasource;
+package com.nacol.TheRoadToGeek.week_06_07.database.datasource.base;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+
+import static com.nacol.TheRoadToGeek.week_06_07.database.datasource.base.DataSourceNameConfig.DRUID_MYSQL;
+import static com.nacol.TheRoadToGeek.week_06_07.database.datasource.base.DataSourceNameConfig.DRUID_PGSQL;
 
 @Configuration
 public class DruidDataSourceConfig {
@@ -14,13 +16,12 @@ public class DruidDataSourceConfig {
     @Autowired
     PostgreSqlConfig postgreSqlConfig;
 
-    @Bean(name = "druidForMySQLDataSource")
+    @Bean(name = DRUID_MYSQL)
     public DruidDataSource druidForMySQLDataSource() {
         return initDruidDataSource(mySqlConfig);
     }
 
-
-    @Bean(name = "druidForPgSQLDataSource")
+    @Bean(name = DRUID_PGSQL)
     public DruidDataSource druidForPgSQLDataSource() {
         return initDruidDataSource(postgreSqlConfig);
     }

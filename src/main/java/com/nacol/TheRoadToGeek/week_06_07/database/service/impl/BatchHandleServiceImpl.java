@@ -17,6 +17,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
+import static com.nacol.TheRoadToGeek.week_06_07.database.datasource.base.DataSourceNameConfig.*;
+
 @Log4j2
 @Service
 public class BatchHandleServiceImpl implements BatchHandleService {
@@ -27,16 +29,16 @@ public class BatchHandleServiceImpl implements BatchHandleService {
     @Resource(name = "basicForPgSQLDataSource")
     DataSource basicForPgSQLDataSource;
 
-    @Resource(name = "hikariForPgSQLDataSource")
+    @Resource(name = HIKARI_PGSQL)
     DataSource hikariForPgSQLDataSource;
 
-    @Resource(name = "hikariForMySQLDataSource")
+    @Resource(name = HIKARI_MYSQL)
     DataSource hikariForMySQLDataSource;
 
-    @Resource(name = "druidForMySQLDataSource")
+    @Resource(name = DRUID_PGSQL)
     DataSource druidForMySQLDataSource;
 
-    @Resource(name = "druidForPgSQLDataSource")
+    @Resource(name = DRUID_MYSQL)
     DataSource druidForPgSQLDataSource;
 
     @Resource(name = "jdbc-fixedThreadPools")
@@ -44,6 +46,7 @@ public class BatchHandleServiceImpl implements BatchHandleService {
 
     @Resource(name = "snowflakeFactory")
     SnowflakeIdWorker snowflakeFactory;
+
     private static final String SQL_INSERT_3 = "insert into order_base_2 (serial_no)  values (?)";
 
     private static final String SQL_INSERT_2 = "insert into order_base_2 (serial_no, create_time, update_time, user_id, " +

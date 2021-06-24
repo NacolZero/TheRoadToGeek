@@ -1,4 +1,4 @@
-package com.nacol.TheRoadToGeek.week_06_07.database.datasource;
+package com.nacol.TheRoadToGeek.week_06_07.database.datasource.base;
 
 public class DatabaseConfig {
 

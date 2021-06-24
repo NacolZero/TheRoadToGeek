@@ -1,10 +1,13 @@
-package com.nacol.TheRoadToGeek.week_06_07.database.datasource;
+package com.nacol.TheRoadToGeek.week_06_07.database.datasource.base;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
+import static com.nacol.TheRoadToGeek.week_06_07.database.datasource.base.DataSourceNameConfig.HIKARI_MYSQL;
+import static com.nacol.TheRoadToGeek.week_06_07.database.datasource.base.DataSourceNameConfig.HIKARI_PGSQL;
 
 @Configuration
 public class HikariDataSourceConfig {
@@ -16,12 +19,12 @@ public class HikariDataSourceConfig {
     PostgreSqlConfig postgreSqlConfig;
 
     @Primary
-    @Bean(name = "hikariForMySQLDataSource")
+    @Bean(name = HIKARI_MYSQL)
     public HikariDataSource hikariForMySQLDataSource() {
         return initHikariDataSource(mySqlConfig);
     }
 
-    @Bean(name = "hikariForPgSQLDataSource")
+    @Bean(name = HIKARI_PGSQL)
     public HikariDataSource hikariForPgSQLDataSource() {
         return initHikariDataSource(postgreSqlConfig);
     }
