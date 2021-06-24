@@ -1,6 +1,9 @@
 package com.nacol.TheRoadToGeek.week_06_07.database.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.nacol.TheRoadToGeek.week_06_07.database.entity.BatchDTO;
+import com.nacol.TheRoadToGeek.week_06_07.database.entity.OrderBase;
+import com.nacol.TheRoadToGeek.week_06_07.database.mapper.OrderBaseMapper;
 import com.nacol.TheRoadToGeek.week_06_07.database.service.BatchHandleService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ public class BatchHandleController {
 
     @Autowired
     BatchHandleService batchHandleService;
+    @Autowired
+    OrderBaseMapper orderBaseMapper;
 
     @PostMapping("handle")
     public String handle(@RequestBody BatchDTO param) throws SQLException {
@@ -39,5 +44,11 @@ public class BatchHandleController {
     @PostMapping("batchInsertPayment")
     public String batchInsertPayment(@RequestBody BatchDTO param) throws SQLException, ExecutionException, InterruptedException {
         return batchHandleService.batchInsertPayment(param);
+    }
+
+    @PostMapping("test1")
+    public String test1(){
+        System.out.println(orderBaseMapper.selectList(new QueryWrapper<OrderBase>().eq("del_flag", 0)));
+        return null;
     }
 }

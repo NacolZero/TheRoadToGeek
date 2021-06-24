@@ -15,7 +15,6 @@ public class DruidDataSourceConfig {
     PostgreSqlConfig postgreSqlConfig;
 
     @Bean(name = "druidForMySQLDataSource")
-    @Primary
     public DruidDataSource druidForMySQLDataSource() {
         return initDruidDataSource(mySqlConfig);
     }
