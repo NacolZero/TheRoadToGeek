@@ -1,6 +1,8 @@
 package com.nacol.TheRoadToGeek.week_06_07.database.controller;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.nacol.TheRoadToGeek.week_06_07.database.datasource.dynamic.DataSourceConfig;
 import com.nacol.TheRoadToGeek.week_06_07.database.entity.BatchDTO;
 import com.nacol.TheRoadToGeek.week_06_07.database.entity.OrderBase;
 import com.nacol.TheRoadToGeek.week_06_07.database.mapper.OrderBaseMapper;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
+
+import static com.nacol.TheRoadToGeek.week_06_07.database.datasource.base.DataSourceNameConfig.*;
 
 @RestController
 @RequestMapping("batch-handle")
@@ -47,7 +51,29 @@ public class BatchHandleController {
     }
 
     @PostMapping("test1")
+    @DataSourceConfig(name = DRUID_MYSQL)
     public String test1(){
+        System.out.println(orderBaseMapper.selectList(new QueryWrapper<OrderBase>().eq("del_flag", 0)));
+        return null;
+    }
+
+    @PostMapping("test2")
+    @DataSourceConfig(name = DRUID_PGSQL)
+    public String test2(){
+        System.out.println(orderBaseMapper.selectList(new QueryWrapper<OrderBase>().eq("del_flag", 0)));
+        return null;
+    }
+
+    @PostMapping("test3")
+    @DataSourceConfig(name = HIKARI_PGSQL)
+    public String test3(){
+        System.out.println(orderBaseMapper.selectList(new QueryWrapper<OrderBase>().eq("del_flag", 0)));
+        return null;
+    }
+
+    @PostMapping("test4")
+    @DataSourceConfig(name = HIKARI_MYSQL)
+    public String test4(){
         System.out.println(orderBaseMapper.selectList(new QueryWrapper<OrderBase>().eq("del_flag", 0)));
         return null;
     }

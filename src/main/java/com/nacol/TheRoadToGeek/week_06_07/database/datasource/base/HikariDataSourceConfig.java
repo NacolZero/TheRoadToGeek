@@ -18,7 +18,7 @@ public class HikariDataSourceConfig {
     @Autowired
     PostgreSqlConfig postgreSqlConfig;
 
-    @Primary
+//    @Primary
     @Bean(name = HIKARI_MYSQL)
     public HikariDataSource hikariForMySQLDataSource() {
         return initHikariDataSource(mySqlConfig);
