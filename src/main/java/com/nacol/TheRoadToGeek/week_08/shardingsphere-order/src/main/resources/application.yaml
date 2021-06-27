@@ -1,0 +1,41 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: geek0,geek1
+      geek0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/geek0?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+      geek1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/geek1?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+    sharding:
+      tables:
+        order_payment:
+          actualDataNodes: geek${0..1}.order_payment_${0..9}
+          databaseStrategy:
+            inline:
+              shardingColumn: order_base_id
+              algorithmExpression: geek${order_base_id % 2}
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              algorithmExpression: order_payment_${id % 10}
+          keyGenerator:
+            type: SNOWFLAKE
+            column: id
+      binding-tables: order_payment
+      broadcast-tables: t_config
+      defaultDataSourceName: geek0
+      defaultTableStrategy:
+        none:
+      defaultKeyGenerator:
+        type: SNOWFLAKE
+        column: id
+    props:
+      sql.show: true
