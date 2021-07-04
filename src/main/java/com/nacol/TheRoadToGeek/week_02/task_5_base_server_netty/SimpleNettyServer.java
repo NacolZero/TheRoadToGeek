@@ -35,7 +35,6 @@ public class SimpleNettyServer {
             bootstrap.option(ChannelOption.SO_BACKLOG, 128)
                     //启用 Nagle 算法
                     .childOption(ChannelOption.TCP_NODELAY, true)
-                    //心跳：有啥用？
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     //让 TCP 的 WAIT_TIME 不需等待
                     .childOption(ChannelOption.SO_REUSEADDR, true)
@@ -45,11 +44,10 @@ public class SimpleNettyServer {
                     .childOption(ChannelOption.SO_SNDBUF, 32 * 1024)
                     //支持多个进程多个线程绑定同一个端口，多个套接字可使用一个端口，不再等“锁”
                     .childOption(EpollChannelOption.SO_REUSEPORT, true)
-//                    .childOption(ChannelOption.SO_KEEPALIVE, true)
-                    .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-
-            //绑定 EvenLoop
-            bootstrap.group(bosssGroup, workerGroup)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+                    //绑定 EvenLoop
+                    .group(bosssGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
 //                    //指定我们另外一个类 ：流水线定义
