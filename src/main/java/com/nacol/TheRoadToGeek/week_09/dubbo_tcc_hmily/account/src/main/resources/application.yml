@@ -1,0 +1,64 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /
+  address: 0.0.0.0
+#spring:
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/hmily0?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+#    username: root
+#    password: 123456
+spring:
+  shardingsphere:
+    datasource:
+      names: hmily0,hmily1
+      hmily0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/hmily0?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+      hmily1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/hmily1?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+    sharding:
+      tables:
+        account:
+          actualDataNodes: hmily${0..1}.account_${0..1}
+          databaseStrategy:
+            inline:
+              shardingColumn: user_id
+              algorithmExpression: hmily${user_id % 2}
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              algorithmExpression: account_${id % 10}
+          keyGenerator:
+            type: SNOWFLAKE
+            column: id
+      #binding-tables: order_payment
+      broadcast-tables: t_config
+      defaultDataSourceName: hmily0
+      defaultTableStrategy:
+        none:
+      defaultKeyGenerator:
+        type: SNOWFLAKE
+        column: id
+    props:
+      sql.show: true
+
+logging:
+  level:
+    root: info
+#    org.springframework.web: info
+#    org.apache.ibatis: debug
+#    org.dromara.hmily.tac: debug
+#    org.dromara.hmily.demo.bonuspoint: debug
+#    org.dromara.hmily.demo.lottery: debug
+#    org.dromara.hmily.demo: debug
+#  path: "./logs"
+
