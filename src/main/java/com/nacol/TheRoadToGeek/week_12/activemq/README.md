@@ -1,0 +1,8 @@
+- DestinationFactory：定义了两种队列 queue 和 topic
+- MQUtils：
+    - 负责定义 ActiveMQ 的连接、session 创建和销毁；
+    - 发布与监听；
+    - 并且定义了一个 listener。
+- NacolQueue1 和 NacolQueue2 两个 queue 类型的消费者
+- NacolTopic1 和 NacolTopic2 两个 topic 类型的消费者
+- Publisher 生产发布。
